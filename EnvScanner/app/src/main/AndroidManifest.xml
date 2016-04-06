@@ -22,7 +22,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".WifiScanDetails" />
-        <activity android:name=".BluetoothScanDetails" />
         <activity android:name=".BluetoothScanSection" />
         <activity android:name=".WifiScanSection"></activity>
     </application>

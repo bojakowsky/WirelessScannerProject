@@ -43,11 +43,12 @@
         android:text="WiFi scanner"
         android:id="@+id/wifiSwitcher"
         android:checked="false"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
         android:switchMinWidth="150dp"
-        android:layout_alignParentEnd="true"
-        android:showText="false" />
+        android:showText="false"
+        android:layout_below="@+id/bluetoothButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="40dp"
+        android:layout_alignParentEnd="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -58,7 +59,8 @@
         android:layout_below="@+id/bluetoothSwitcher"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:enabled="false" />
+        android:enabled="false"
+        android:layout_marginTop="10dp" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -66,9 +68,10 @@
         android:layout_height="wrap_content"
         android:text="Wifi scan results"
         android:id="@+id/wifiButton"
+        android:enabled="false"
         android:layout_below="@+id/wifiSwitcher"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:enabled="false" />
+        android:layout_marginTop="10dp"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
