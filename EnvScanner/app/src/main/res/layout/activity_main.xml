@@ -23,12 +23,52 @@
             android:id="@+id/mainText" />
     </ScrollView>
 
-    <ListView
+    <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/wifiScanResults"
+        android:text="Bluetooth scanner"
+        android:id="@+id/bluetoothSwitcher"
+        android:layout_marginTop="111dp"
+        android:checked="false"
         android:layout_below="@+id/scrollView"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="44dp"
-        android:choiceMode="singleChoice" />
+        android:showText="false"
+        android:switchMinWidth="150dp"
+        android:contextClickable="false" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WiFi scanner"
+        android:id="@+id/wifiSwitcher"
+        android:checked="false"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:switchMinWidth="150dp"
+        android:layout_alignParentEnd="true"
+        android:showText="false" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bluetooth scan results"
+        android:id="@+id/bluetoothButton"
+        android:layout_below="@+id/bluetoothSwitcher"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:enabled="false" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wifi scan results"
+        android:id="@+id/wifiButton"
+        android:layout_below="@+id/wifiSwitcher"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:enabled="false" />
+
 </RelativeLayout>
