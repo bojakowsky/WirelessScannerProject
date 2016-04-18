@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Application;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -12,11 +11,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,9 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static android.content.pm.PackageManager.*;
+
 public class MainActivity extends Activity {
 
     private TextView deviceMainText;
@@ -54,7 +58,7 @@ public class MainActivity extends Activity {
 
 
     public void InitializeView(){
-        deviceMainText = (TextView) findViewById(R.id.mainText);
+        deviceMainText = (TextView) findViewById(R.id.numberOfWifiText);
 
         wifiSwitch = (Switch) findViewById(R.id.wifiSwitcher);
         bluetoothSwitch = (Switch) findViewById(R.id.bluetoothSwitcher);
