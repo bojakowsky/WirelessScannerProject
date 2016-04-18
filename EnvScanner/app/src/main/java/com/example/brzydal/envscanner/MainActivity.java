@@ -26,12 +26,18 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.provider.Settings.Secure;
+
+import org.w3c.dom.Text;
 
 import static android.content.pm.PackageManager.*;
 
 public class MainActivity extends Activity {
 
     private TextView deviceMainText;
+
+
+    String android_id = Secure.getString(getContentResolver(), Secure.ANDROID_ID);
 
     //Switches
     private Switch wifiSwitch;
@@ -40,6 +46,12 @@ public class MainActivity extends Activity {
     //Buttons
     private Button wifiButton;
     private Button bluetoothButton;
+
+    //TextViews
+    private TextView wifiText;
+    private TextView bluetoothText;
+    private TextView locationText;
+    private TextView phoneIdText;
 
     //Wifi section
     private WifiManager mainWifi;
@@ -58,7 +70,12 @@ public class MainActivity extends Activity {
 
 
     public void InitializeView(){
-        deviceMainText = (TextView) findViewById(R.id.numberOfWifiText);
+
+        phoneIdText = (TextView) findViewById(R.id.phoneIdText);
+        wifiText = (TextView) findViewById(R.id.numberOfWifiText);
+        bluetoothText = (TextView) findViewById(R.id.numberOfBlueToothText);
+        locationText = (TextView) findViewById(R.id.locationText);
+
 
         wifiSwitch = (Switch) findViewById(R.id.wifiSwitcher);
         bluetoothSwitch = (Switch) findViewById(R.id.bluetoothSwitcher);
@@ -206,16 +223,11 @@ public class MainActivity extends Activity {
 
     }
 
-    protected void PrintScanningData()
-    {
-        sb = new StringBuilder();
-
-        sb.append("Wifi connections : " + wifiScanResultList.size() + "\n");
-        sb.append("Bluetooth connections: " + bluetoothScanResultList.size() + "\n");
-        sb.append("Android API : " + Integer.valueOf(android.os.Build.VERSION.SDK) + "\n");
-        sb.append("Android ID : " + Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID) + "\n");
-        sb.append("Coordinates : " + GPSLocalizer.GetLocation());
-        deviceMainText.setText(sb);
+    protected void PrintScanningData() {
+        wifiText.setText(wifiScanResultList.size());
+        bluetoothText.setText(bluetoothScanResultList.size());
+        locationText.setText(GPSLocalizer.GetLocation());
+        phoneIdText.setText(android_id);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
