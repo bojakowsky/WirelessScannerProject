@@ -37,8 +37,6 @@ public class MainActivity extends Activity {
     private TextView deviceMainText;
 
 
-    String android_id = Secure.getString(getContentResolver(), Secure.ANDROID_ID);
-
     //Switches
     private Switch wifiSwitch;
     private Switch bluetoothSwitch;
