@@ -26,6 +26,7 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import android.provider.Settings.Secure;
 
 import org.w3c.dom.Text;
@@ -33,9 +34,6 @@ import org.w3c.dom.Text;
 import static android.content.pm.PackageManager.*;
 
 public class MainActivity extends Activity {
-
-    private TextView deviceMainText;
-
 
     //Switches
     private Switch wifiSwitch;
@@ -69,11 +67,10 @@ public class MainActivity extends Activity {
 
     public void InitializeView(){
 
-        phoneIdText = (TextView) findViewById(R.id.phoneIdText);
         wifiText = (TextView) findViewById(R.id.numberOfWifiText);
         bluetoothText = (TextView) findViewById(R.id.numberOfBlueToothText);
         locationText = (TextView) findViewById(R.id.locationText);
-
+        phoneIdText = (TextView) findViewById(R.id.phoneIdText);
 
         wifiSwitch = (Switch) findViewById(R.id.wifiSwitcher);
         bluetoothSwitch = (Switch) findViewById(R.id.bluetoothSwitcher);
@@ -222,10 +219,12 @@ public class MainActivity extends Activity {
     }
 
     protected void PrintScanningData() {
+        sb = new StringBuilder();
+
         wifiText.setText(wifiScanResultList.size());
         bluetoothText.setText(bluetoothScanResultList.size());
         locationText.setText(GPSLocalizer.GetLocation());
-    //    phoneIdText.setText(android_id);
+        phoneIdText.setText(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
