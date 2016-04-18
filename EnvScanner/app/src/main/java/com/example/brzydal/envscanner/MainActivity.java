@@ -225,7 +225,7 @@ public class MainActivity extends Activity {
         wifiText.setText(wifiScanResultList.size());
         bluetoothText.setText(bluetoothScanResultList.size());
         locationText.setText(GPSLocalizer.GetLocation());
-        phoneIdText.setText(android_id);
+    //    phoneIdText.setText(android_id);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
