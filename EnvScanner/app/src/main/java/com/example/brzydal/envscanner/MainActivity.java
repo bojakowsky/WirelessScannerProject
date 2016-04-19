@@ -42,7 +42,6 @@ public class MainActivity extends Activity {
     //Buttons
     private Button wifiButton;
     private Button bluetoothButton;
-
     //TextViews
     private TextView wifiText;
     private TextView bluetoothText;
@@ -207,6 +206,18 @@ public class MainActivity extends Activity {
             @Override
             public void run() {
 
+                if(wifiScanResultList.size() < 1){
+                    wifiButton.setEnabled(false);
+                } else {
+                    wifiButton.setEnabled(true);
+                }
+
+                if(bluetoothScanResultList.size() < 1){
+                    bluetoothButton.setEnabled(false);
+                } else {
+                    bluetoothButton.setEnabled(true);
+                }
+
                 PrintScanningData();
                 if (wifiSwitch.isChecked())
                     mainWifi.startScan();
@@ -219,8 +230,6 @@ public class MainActivity extends Activity {
     }
 
     protected void PrintScanningData() {
-        sb = new StringBuilder();
-
         wifiText.setText(String.valueOf(wifiScanResultList.size()));
         bluetoothText.setText(String.valueOf(bluetoothScanResultList.size()));
         locationText.setText(GPSLocalizer.GetLocation());
