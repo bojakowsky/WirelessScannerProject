@@ -149,8 +149,7 @@ public class MainActivity extends Activity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     WifiConfiguration();
-                    wifiButton.setEnabled(true);
-                } else wifiButton.setEnabled(false);
+                }
             }
         });
 
@@ -174,8 +173,7 @@ public class MainActivity extends Activity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     BluetoothConfiguration();
-                    bluetoothButton.setEnabled(true);
-                } else bluetoothButton.setEnabled(false);
+                }
             }
         });
 
