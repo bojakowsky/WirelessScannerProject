@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnvScannerManagement", "EnvScannerManagement\EnvScannerManagement.csproj", "{D081E112-C37B-437C-B0BA-8161D78C67DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{FFCEF720-ACD7-492A-8923-BDE06187EDB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D081E112-C37B-437C-B0BA-8161D78C67DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D081E112-C37B-437C-B0BA-8161D78C67DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D081E112-C37B-437C-B0BA-8161D78C67DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFCEF720-ACD7-492A-8923-BDE06187EDB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFCEF720-ACD7-492A-8923-BDE06187EDB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFCEF720-ACD7-492A-8923-BDE06187EDB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFCEF720-ACD7-492A-8923-BDE06187EDB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
