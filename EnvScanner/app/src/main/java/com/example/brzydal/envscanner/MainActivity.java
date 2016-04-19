@@ -9,7 +9,11 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +30,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
@@ -41,6 +46,9 @@ import android.widget.Toast;
 
 import android.provider.Settings.Secure;
 
+import com.example.brzydal.envscanner.DataStructure.Bluetooth;
+import com.example.brzydal.envscanner.DataStructure.JSONSerializableAndroidData;
+import com.example.brzydal.envscanner.DataStructure.Wifi;
 import com.google.gson.GsonBuilder;
 
 import org.apache.http.HttpResponse;
@@ -227,13 +235,13 @@ public class MainActivity extends Activity {
             @Override
             public void run() {
 
-                if(wifiScanResultList.size() < 1){
+                if (wifiScanResultList.size() < 1) {
                     wifiButton.setEnabled(false);
                 } else {
                     wifiButton.setEnabled(true);
                 }
 
-                if(bluetoothScanResultList.size() < 1){
+                if (bluetoothScanResultList.size() < 1) {
                     bluetoothButton.setEnabled(false);
                 } else {
                     bluetoothButton.setEnabled(true);
@@ -244,60 +252,66 @@ public class MainActivity extends Activity {
                     mainWifi.startScan();
                 if (bluetoothSwitch.isChecked())
                     bluetoothAdapter.startDiscovery();
+                SendDataAsyncToServer();
                 doScanning();
             }
         }, 12000);
 
     }
 
-    public void execute() {
-        HttpURLConnection httpcon;
-        String url = "http://localhost:18608/Scanner/CollectAndroidData";
-        String data = "test123";
-        String result = null;
-        try{
-        //Connect
-            httpcon = (HttpURLConnection) ((new URL(url).openConnection()));
-            httpcon.setDoOutput(true);
-            httpcon.setRequestProperty("Content-Type", "application/json");
-            httpcon.setRequestProperty("Accept", "application/json");
-            httpcon.setRequestMethod("POST");
-            httpcon.connect();
-
-            //Write
-            OutputStream os = httpcon.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-            writer.write(data);
-            writer.close();
-            os.close();
-
-            //Read
-            BufferedReader br = new BufferedReader(new InputStreamReader(httpcon.getInputStream(),"UTF-8"));
-
-            String line = null;
-            StringBuilder sb = new StringBuilder();
-
-            while ((line = br.readLine()) != null) {
-                sb.append(line);
-            }
-
-            br.close();
-            result = sb.toString();
-
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private String getDateTime() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date(); return dateFormat.format(date);
     }
 
+    protected void SendDataAsyncToServer()
+    {
+        JSONSerializableAndroidData dataToSend = new JSONSerializableAndroidData();
+        //Id and general
+        dataToSend.setId(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID).toString());
+        dataToSend.setAndroidAPI(String.valueOf(android.os.Build.VERSION.SDK));
+        dataToSend.setNumberOfBtConnections(bluetoothScanResultList.size());
+        dataToSend.setNumberOfWifiConnections(wifiScanResultList.size());
+        dataToSend.setDateAndTime(getDateTime());
+        dataToSend.setGPSlatitude(GPSLocalizer.latitude);
+        dataToSend.setGPSLongtitude(GPSLocalizer.longitude);
+        //wifi
+        List<Wifi> wifiListToAdd = new ArrayList<>();
+        for (ScanResult wifi: wifiScanResultList)
+        {
+            Wifi wifiToAdd = new Wifi();
+            wifiToAdd.setBSSID(wifi.BSSID);
+            wifiToAdd.setFrequency(wifi.frequency);
+            wifiToAdd.setLevel(wifi.level);
+            wifiToAdd.setSecurity(wifi.capabilities);
+            wifiToAdd.setSSID(wifi.SSID);
+            wifiToAdd.setTimestamp(String.valueOf(wifi.timestamp));
+            wifiListToAdd.add(wifiToAdd);
+        }
+        dataToSend.setWifis(wifiListToAdd);
 
+        //bluetooth
+        List<Bluetooth> btListToAdd = new ArrayList<>();
+        for (BluetoothDevice bluetooth: bluetoothScanResultList)
+        {
+            Bluetooth btToAdd = new Bluetooth();
+            btToAdd.setDeviceName(bluetooth.getName());
+            btToAdd.setMAC(bluetooth.getAddress());
+            btListToAdd.add(btToAdd);
+        }
+        dataToSend.setBluetooths(btListToAdd);
+
+
+        AsyncDataSend dataSender = new AsyncDataSend();
+        dataSender.AndroidData = dataToSend;
+        dataSender.execute();
+
+    }
     protected void PrintScanningData() {
         wifiText.setText(String.valueOf(wifiScanResultList.size()));
         bluetoothText.setText(String.valueOf(bluetoothScanResultList.size()));
         locationText.setText(GPSLocalizer.GetLocation());
         phoneIdText.setText(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID).toString());
-        execute();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

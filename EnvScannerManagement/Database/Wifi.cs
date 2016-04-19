@@ -8,6 +8,7 @@ namespace Database
 {
     public class Wifi
     {
+        public int Id { get; set; }
         public string BSSID { get; set; }
         public string Security { get; set; }
         public string SSID { get; set; }
@@ -15,7 +16,7 @@ namespace Database
         public int Level { get; set; }
         public string Timestamp { get; set; }
 
-        public string DeviceId { get; set; }
-        public virtual Device Device { get; set; }
+        public int GeneralId { get; set; }
+        public virtual General General { get; set; }
     }
 }

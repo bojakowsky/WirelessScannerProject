@@ -164,3 +164,9 @@ C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\EnvSca
 C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\EnvScannerManagement\obj\Debug\EnvScannerManagement.csprojResolveAssemblyReference.cache
 C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\EnvScannerManagement\obj\Debug\EnvScannerManagement.dll
 C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\EnvScannerManagement\obj\Debug\EnvScannerManagement.pdb
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\EnvScannerManagement\bin\System.Net.Http.Formatting.dll
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\EnvScannerManagement\bin\System.Web.Http.dll
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\EnvScannerManagement\bin\System.Web.Http.WebHost.dll
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\EnvScannerManagement\bin\System.Net.Http.Formatting.xml
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\EnvScannerManagement\bin\System.Web.Http.xml
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\EnvScannerManagement\bin\System.Web.Http.WebHost.xml

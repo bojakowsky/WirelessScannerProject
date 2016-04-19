@@ -9,19 +9,9 @@ namespace Database
 {
     public class Device
     {
-        //Device data
-        public string DeviceId { get; set; }
-        public string AndroidAPI { get; set; }
-        public int NumberOfWifiConnections { get; set; }
-        public int NumberOfBtConnections { get; set; }
-        public double GPSlatitude { get; set; }
-        public double GPSLongtitude { get; set; }
+        public string Id { get; set; }
 
-        //Wifi data
-        public virtual List<Wifi> Wifis { get; set; }
-
-        //Bluetooth
-        public virtual List<Bluetooth> Bluetooths { get; set; }
+        public virtual List<General> General { get; set; }
     }
 }
 

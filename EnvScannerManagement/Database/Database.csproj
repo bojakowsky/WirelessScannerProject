@@ -52,6 +52,7 @@
     <Compile Include="Bluetooth.cs" />
     <Compile Include="DatabaseContext.cs" />
     <Compile Include="Device.cs" />
+    <Compile Include="General.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wifi.cs" />
   </ItemGroup>

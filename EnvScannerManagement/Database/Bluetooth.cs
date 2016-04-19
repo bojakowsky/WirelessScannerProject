@@ -8,10 +8,11 @@ namespace Database
 {
     public class Bluetooth
     {
+        public int Id { get; set; }
         public string MAC { get; set; }
         public string DeviceName { get; set; }
 
-        public string DeviceId { get; set; }
-        public virtual Device Device { get; set; }
+        public int GeneralId { get; set; }
+        public virtual General General { get; set; }
     }
 }
