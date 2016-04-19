@@ -61,7 +61,6 @@ public class MainActivity extends Activity {
     //Buttons
     private Button wifiButton;
     private Button bluetoothButton;
-
     //TextViews
     private TextView wifiText;
     private TextView bluetoothText;
@@ -162,13 +161,14 @@ public class MainActivity extends Activity {
 
     public void InitializeWifi()
     {
+
+        wifiButton.setEnabled(false);
         //Check change listener - user click
         wifiSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     WifiConfiguration();
-                    wifiButton.setEnabled(true);
-                } else wifiButton.setEnabled(false);
+                }
             }
         });
 
@@ -185,13 +185,14 @@ public class MainActivity extends Activity {
 
     public void InitializeBluetooth()
     {
+
+        bluetoothButton.setEnabled(false);
         //Listener on check changed - user click on slider
         bluetoothSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     BluetoothConfiguration();
-                    bluetoothButton.setEnabled(true);
-                } else bluetoothButton.setEnabled(false);
+                }
             }
         });
 
@@ -225,6 +226,18 @@ public class MainActivity extends Activity {
 
             @Override
             public void run() {
+
+                if(wifiScanResultList.size() < 1){
+                    wifiButton.setEnabled(false);
+                } else {
+                    wifiButton.setEnabled(true);
+                }
+
+                if(bluetoothScanResultList.size() < 1){
+                    bluetoothButton.setEnabled(false);
+                } else {
+                    bluetoothButton.setEnabled(true);
+                }
 
                 PrintScanningData();
                 if (wifiSwitch.isChecked())
@@ -280,8 +293,6 @@ public class MainActivity extends Activity {
 
 
     protected void PrintScanningData() {
-        sb = new StringBuilder();
-
         wifiText.setText(String.valueOf(wifiScanResultList.size()));
         bluetoothText.setText(String.valueOf(bluetoothScanResultList.size()));
         locationText.setText(GPSLocalizer.GetLocation());
