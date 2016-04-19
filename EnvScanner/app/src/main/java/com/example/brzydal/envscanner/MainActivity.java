@@ -142,6 +142,8 @@ public class MainActivity extends Activity {
 
     public void InitializeWifi()
     {
+
+        wifiButton.setEnabled(false);
         //Check change listener - user click
         wifiSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -165,6 +167,8 @@ public class MainActivity extends Activity {
 
     public void InitializeBluetooth()
     {
+
+        bluetoothButton.setEnabled(false);
         //Listener on check changed - user click on slider
         bluetoothSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
