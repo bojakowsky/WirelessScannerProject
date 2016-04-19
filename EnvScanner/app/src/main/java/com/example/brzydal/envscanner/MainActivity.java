@@ -221,8 +221,8 @@ public class MainActivity extends Activity {
     protected void PrintScanningData() {
         sb = new StringBuilder();
 
-        wifiText.setText(wifiScanResultList.size());
-        bluetoothText.setText(bluetoothScanResultList.size());
+        wifiText.setText(String.valueOf(wifiScanResultList.size()));
+        bluetoothText.setText(String.valueOf(bluetoothScanResultList.size()));
         locationText.setText(GPSLocalizer.GetLocation());
         phoneIdText.setText(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID).toString());
     }
