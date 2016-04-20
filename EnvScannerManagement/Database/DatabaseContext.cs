@@ -11,9 +11,10 @@ namespace Database
 {
     public class DatabaseContext : DbContext
     {
-
+       
         public DatabaseContext() : base("WirelessCollector")
         {
+
             this.Database.CreateIfNotExists();
         }
 

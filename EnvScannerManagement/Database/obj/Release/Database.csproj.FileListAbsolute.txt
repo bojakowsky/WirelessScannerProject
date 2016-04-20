@@ -1,0 +1,9 @@
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Release\Database.dll.config
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Release\Database.dll
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Release\Database.pdb
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Release\EntityFramework.dll
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Release\EntityFramework.xml
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\obj\Release\Database.dll
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\obj\Release\Database.pdb

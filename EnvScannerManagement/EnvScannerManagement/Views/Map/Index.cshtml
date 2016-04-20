@@ -1,0 +1,165 @@
+﻿@model IEnumerable<Database.General>
+@using Newtonsoft.Json
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            height: 100%;
+        }
+
+        .floating-panel {
+            position: absolute;
+            left: 0.5%;
+            z-index: 5;
+            background-color: #fff;
+            padding: 5px;
+            border: 1px solid #999;
+            text-align: center;
+            font-family: 'Roboto','sans-serif';
+        }
+
+        .main-panel {
+            top: 4.1%;
+        }
+
+        .marker-panel {
+            top: 7.4%;
+        }
+
+        .marker-nextprev-panel {
+            top: 10.9%;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-panel main-panel" id="MainPanel">
+        <input onchange="togglePanelVisibility();" type="checkbox" value="Hide Panels" />
+    </div>
+    <div class="floating-panel marker-panel" id="MarkerPanel">
+        <input onclick="clearMarkers();" type=button value="Hide Markers">
+        <input onclick="showMarkers();" type=button value="Show Markers">
+    </div>
+
+    <div id="map"></div>
+
+    <script>
+
+
+        //Google Maps API map, markers, infoWindows initialization
+        var data;
+        var map;
+        var markers = [];
+        data = @Html.Raw(JsonConvert.SerializeObject(this.Model, new JsonSerializerSettings {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        }));
+
+        function initMap() {
+            var latlng = new google.maps.LatLng(data[0].GPSlatitude, data[0].GPSLongtitude);
+            var myOptions = {
+                zoom: 10,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.SATELLITE,
+                scaleControl: true
+            };
+
+            map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+            for (var i = 0; i < data.length; i++) {
+                var iconToBeSet = '';
+                if (data[i].NumberOfWifiConnections > 0 && data[i].NumberOfBtConnections > 0)
+                    iconToBeSet = '../Content/MapIcons/blue_MarkerA.png';
+                else if (data[i].NumberOfWifiConnections > 0 && data[i].NumberOfBtConnections == 0)
+                    iconToBeSet = '../Content/MapIcons/red_MarkerA.png';
+                else if (data[i].NumberOfWifiConnections == 0 && data[i].NumberOfBtConnections > 0)
+                    iconToBeSet = '../Content/MapIcons/green_MarkerA.png';
+                else iconToBeSet = '../Content/MapIcons/yellow_MarkerA.png';
+
+                marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(data[i].GPSlatitude, data[i].GPSLongtitude),
+                    icon: iconToBeSet
+                });
+                markers.push(marker);
+
+                (function (i, marker) {
+
+                    google.maps.event.addListener(marker, 'click', function () {
+                        infowindow = new google.maps.InfoWindow();
+                        var content =
+                            "Device Id: " + data[i].DeviceId + "<br/>"
+                            +"Latitude: " + data[i].GPSlatitude + "<br/>"
+                            +"Longtitude: " + data[i].GPSLongtitude + "<br/>"
+                            +"Date and time: " + data[i].DateAndTime + "<br/>"
+                            +"No. wifi connections: " + data[i].NumberOfWifiConnections + "<br/>"
+                            +"No. bluetooth connections: " + data[i].NumberOfBtConnections + "<br/>"
+                        if (data[i].Wifis != null && data[i].Wifis.length > 0)
+                            for (var j = 0 ; j < data[i].Wifis.length; j++)
+                            {
+                                content = content + "<br/>"
+                                + "BSSID:" + data[i].Wifis[j].BSSID + "<br/>"
+                                + "SSID:" + data[i].Wifis[j].SSID + "<br/>"
+                                + "Security:" + data[i].Wifis[j].Security + "<br/>"
+                                + "Frequency:" + data[i].Wifis[j].Frequency + "<br/>"
+                                + "Level:" + data[i].Wifis[j].Level + "<br/>"
+                                + "Timestamp:" + data[i].Wifis[j].Timestamp + "<br/>"
+                            }
+                        if (data[i].Bluetooths != null && data[i].Bluetooths.length > 0)
+                            for (var j = 0 ; j < data[i].Bluetooths.length; j++)
+                            {
+                                content = content + "<br/>"
+                                + "BSSID:" + data[i].Bluetooths[j].DeviceName + "<br/>"
+                                + "SSID:" + data[i].Bluetooths[j].MAC + "<br/>"
+                            }
+                        infowindow.setContent(content);
+                        infowindow.open(map, marker);
+
+                    });
+
+                })(i, marker);
+
+            }
+        }
+
+        // Sets the map on all markers in the array.
+        function setMapOnAll(map) {
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(map);
+            }
+        }
+
+        //Panels
+        function togglePanelVisibility()
+        {
+            var markerPanel = document.getElementById("MarkerPanel");
+            markerPanel.hidden = !markerPanel.hidden;
+
+            var PrevNextMarkerPanel = document.getElementById("PrevNextMarkerPanel");
+            PrevNextMarkerPanel.hidden = !PrevNextMarkerPanel.hidden;
+        }
+
+        function clearMarkers(){
+            setMapOnAll(null);
+        }
+
+        function showMarkers(){
+            setMapOnAll(map);
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=U_KNOW_WHERE_TO_FIND_THIS_KEY_IFNOT_THEN_ASK_ME&callback=initMap"
+            async defer></script>
+</body>
+</html>

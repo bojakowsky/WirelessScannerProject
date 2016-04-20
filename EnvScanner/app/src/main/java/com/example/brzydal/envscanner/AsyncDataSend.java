@@ -58,7 +58,7 @@ public class AsyncDataSend extends AsyncTask<Void, Void, Void>{
             //Model model = (Model) jsonHttpClient.PostParams("http://192.168.0.100:18608/api/Scanner", args, Model.class);
             //Model model = new Model();
             //model.model = "TEST";
-            jsonHttpClient.PostObject("http://192.168.0.100:18608/api/Scanner", AndroidData, JSONSerializableAndroidData.class);
+            jsonHttpClient.PostObject("http://100.66.158.41:18608/api/Scanner", AndroidData, JSONSerializableAndroidData.class);
         }
         catch (Exception e){
             e.printStackTrace();

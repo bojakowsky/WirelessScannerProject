@@ -22,9 +22,9 @@ namespace Database
         public virtual Device Device { get; set; }
 
         //Wifi data
-        public virtual List<Wifi> Wifis { get; set; }
+        public virtual ICollection<Wifi> Wifis { get; set; }
 
         //Bluetooth
-        public virtual List<Bluetooth> Bluetooths { get; set; }
+        public virtual ICollection<Bluetooth> Bluetooths { get; set; }
     }
 }

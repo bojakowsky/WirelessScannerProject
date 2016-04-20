@@ -11,7 +11,7 @@ namespace Database
     {
         public string Id { get; set; }
 
-        public virtual List<General> General { get; set; }
+        public virtual ICollection<General> General { get; set; }
     }
 }
 

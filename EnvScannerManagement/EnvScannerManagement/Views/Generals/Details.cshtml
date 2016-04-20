@@ -1,0 +1,75 @@
+﻿@model Database.General
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>General</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Device.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Device.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AndroidAPI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AndroidAPI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfWifiConnections)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfWifiConnections)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfBtConnections)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfBtConnections)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GPSlatitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GPSlatitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GPSLongtitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GPSLongtitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateAndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateAndTime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

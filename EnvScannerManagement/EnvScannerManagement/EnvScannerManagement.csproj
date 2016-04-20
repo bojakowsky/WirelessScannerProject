@@ -45,11 +45,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept">
@@ -85,11 +85,23 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Data.Edm, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Edm.5.6.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.OData.5.6.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Spatial, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Spatial.5.6.0\lib\net40\System.Spatial.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
@@ -100,6 +112,10 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.OData, Version=5.3.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.OData.5.3.1\lib\net45\System.Web.Http.OData.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -211,9 +227,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GeneralsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\ScannerController.cs" />
+    <Compile Include="Controllers\MapController.cs" />
+    <Compile Include="Controllers\ScannerApiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -226,17 +244,282 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\MapIcons\blue_MarkerA.png" />
+    <Content Include="Content\MapIcons\blue_MarkerB.png" />
+    <Content Include="Content\MapIcons\blue_MarkerC.png" />
+    <Content Include="Content\MapIcons\blue_MarkerD.png" />
+    <Content Include="Content\MapIcons\blue_MarkerE.png" />
+    <Content Include="Content\MapIcons\blue_MarkerF.png" />
+    <Content Include="Content\MapIcons\blue_MarkerG.png" />
+    <Content Include="Content\MapIcons\blue_MarkerH.png" />
+    <Content Include="Content\MapIcons\blue_MarkerI.png" />
+    <Content Include="Content\MapIcons\blue_MarkerJ.png" />
+    <Content Include="Content\MapIcons\blue_MarkerK.png" />
+    <Content Include="Content\MapIcons\blue_MarkerL.png" />
+    <Content Include="Content\MapIcons\blue_MarkerM.png" />
+    <Content Include="Content\MapIcons\blue_MarkerN.png" />
+    <Content Include="Content\MapIcons\blue_MarkerO.png" />
+    <Content Include="Content\MapIcons\blue_MarkerP.png" />
+    <Content Include="Content\MapIcons\blue_MarkerQ.png" />
+    <Content Include="Content\MapIcons\blue_MarkerR.png" />
+    <Content Include="Content\MapIcons\blue_MarkerS.png" />
+    <Content Include="Content\MapIcons\blue_MarkerT.png" />
+    <Content Include="Content\MapIcons\blue_MarkerU.png" />
+    <Content Include="Content\MapIcons\blue_MarkerV.png" />
+    <Content Include="Content\MapIcons\blue_MarkerW.png" />
+    <Content Include="Content\MapIcons\blue_MarkerX.png" />
+    <Content Include="Content\MapIcons\blue_MarkerY.png" />
+    <Content Include="Content\MapIcons\blue_MarkerZ.png" />
+    <Content Include="Content\MapIcons\brown_MarkerA.png" />
+    <Content Include="Content\MapIcons\brown_MarkerB.png" />
+    <Content Include="Content\MapIcons\brown_MarkerC.png" />
+    <Content Include="Content\MapIcons\brown_MarkerD.png" />
+    <Content Include="Content\MapIcons\brown_MarkerE.png" />
+    <Content Include="Content\MapIcons\brown_MarkerF.png" />
+    <Content Include="Content\MapIcons\brown_MarkerG.png" />
+    <Content Include="Content\MapIcons\brown_MarkerH.png" />
+    <Content Include="Content\MapIcons\brown_MarkerI.png" />
+    <Content Include="Content\MapIcons\brown_MarkerJ.png" />
+    <Content Include="Content\MapIcons\brown_MarkerK.png" />
+    <Content Include="Content\MapIcons\brown_MarkerL.png" />
+    <Content Include="Content\MapIcons\brown_MarkerM.png" />
+    <Content Include="Content\MapIcons\brown_MarkerN.png" />
+    <Content Include="Content\MapIcons\brown_MarkerO.png" />
+    <Content Include="Content\MapIcons\brown_MarkerP.png" />
+    <Content Include="Content\MapIcons\brown_MarkerQ.png" />
+    <Content Include="Content\MapIcons\brown_MarkerR.png" />
+    <Content Include="Content\MapIcons\brown_MarkerS.png" />
+    <Content Include="Content\MapIcons\brown_MarkerT.png" />
+    <Content Include="Content\MapIcons\brown_MarkerU.png" />
+    <Content Include="Content\MapIcons\brown_MarkerV.png" />
+    <Content Include="Content\MapIcons\brown_MarkerW.png" />
+    <Content Include="Content\MapIcons\brown_MarkerX.png" />
+    <Content Include="Content\MapIcons\brown_MarkerY.png" />
+    <Content Include="Content\MapIcons\brown_MarkerZ.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerA.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerB.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerC.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerD.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerE.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerF.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerG.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerH.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerI.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerJ.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerK.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerL.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerM.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerN.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerO.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerP.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerQ.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerR.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerS.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerT.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerU.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerV.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerW.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerX.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerY.png" />
+    <Content Include="Content\MapIcons\darkgreen_MarkerZ.png" />
+    <Content Include="Content\MapIcons\green_MarkerA.png" />
+    <Content Include="Content\MapIcons\green_MarkerB.png" />
+    <Content Include="Content\MapIcons\green_MarkerC.png" />
+    <Content Include="Content\MapIcons\green_MarkerD.png" />
+    <Content Include="Content\MapIcons\green_MarkerE.png" />
+    <Content Include="Content\MapIcons\green_MarkerF.png" />
+    <Content Include="Content\MapIcons\green_MarkerG.png" />
+    <Content Include="Content\MapIcons\green_MarkerH.png" />
+    <Content Include="Content\MapIcons\green_MarkerI.png" />
+    <Content Include="Content\MapIcons\green_MarkerJ.png" />
+    <Content Include="Content\MapIcons\green_MarkerK.png" />
+    <Content Include="Content\MapIcons\green_MarkerL.png" />
+    <Content Include="Content\MapIcons\green_MarkerM.png" />
+    <Content Include="Content\MapIcons\green_MarkerN.png" />
+    <Content Include="Content\MapIcons\green_MarkerO.png" />
+    <Content Include="Content\MapIcons\green_MarkerP.png" />
+    <Content Include="Content\MapIcons\green_MarkerQ.png" />
+    <Content Include="Content\MapIcons\green_MarkerR.png" />
+    <Content Include="Content\MapIcons\green_MarkerS.png" />
+    <Content Include="Content\MapIcons\green_MarkerT.png" />
+    <Content Include="Content\MapIcons\green_MarkerU.png" />
+    <Content Include="Content\MapIcons\green_MarkerV.png" />
+    <Content Include="Content\MapIcons\green_MarkerW.png" />
+    <Content Include="Content\MapIcons\green_MarkerX.png" />
+    <Content Include="Content\MapIcons\green_MarkerY.png" />
+    <Content Include="Content\MapIcons\green_MarkerZ.png" />
+    <Content Include="Content\MapIcons\orange_MarkerA.png" />
+    <Content Include="Content\MapIcons\orange_MarkerB.png" />
+    <Content Include="Content\MapIcons\orange_MarkerC.png" />
+    <Content Include="Content\MapIcons\orange_MarkerD.png" />
+    <Content Include="Content\MapIcons\orange_MarkerE.png" />
+    <Content Include="Content\MapIcons\orange_MarkerF.png" />
+    <Content Include="Content\MapIcons\orange_MarkerG.png" />
+    <Content Include="Content\MapIcons\orange_MarkerH.png" />
+    <Content Include="Content\MapIcons\orange_MarkerI.png" />
+    <Content Include="Content\MapIcons\orange_MarkerJ.png" />
+    <Content Include="Content\MapIcons\orange_MarkerK.png" />
+    <Content Include="Content\MapIcons\orange_MarkerL.png" />
+    <Content Include="Content\MapIcons\orange_MarkerM.png" />
+    <Content Include="Content\MapIcons\orange_MarkerN.png" />
+    <Content Include="Content\MapIcons\orange_MarkerO.png" />
+    <Content Include="Content\MapIcons\orange_MarkerP.png" />
+    <Content Include="Content\MapIcons\orange_MarkerQ.png" />
+    <Content Include="Content\MapIcons\orange_MarkerR.png" />
+    <Content Include="Content\MapIcons\orange_MarkerS.png" />
+    <Content Include="Content\MapIcons\orange_MarkerT.png" />
+    <Content Include="Content\MapIcons\orange_MarkerU.png" />
+    <Content Include="Content\MapIcons\orange_MarkerV.png" />
+    <Content Include="Content\MapIcons\orange_MarkerW.png" />
+    <Content Include="Content\MapIcons\orange_MarkerX.png" />
+    <Content Include="Content\MapIcons\orange_MarkerY.png" />
+    <Content Include="Content\MapIcons\orange_MarkerZ.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerA.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerB.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerC.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerD.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerE.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerF.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerG.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerH.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerI.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerJ.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerK.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerL.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerM.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerN.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerO.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerP.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerQ.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerR.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerS.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerT.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerU.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerV.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerW.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerX.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerY.png" />
+    <Content Include="Content\MapIcons\paleblue_MarkerZ.png" />
+    <Content Include="Content\MapIcons\pink_MarkerA.png" />
+    <Content Include="Content\MapIcons\pink_MarkerB.png" />
+    <Content Include="Content\MapIcons\pink_MarkerC.png" />
+    <Content Include="Content\MapIcons\pink_MarkerD.png" />
+    <Content Include="Content\MapIcons\pink_MarkerE.png" />
+    <Content Include="Content\MapIcons\pink_MarkerF.png" />
+    <Content Include="Content\MapIcons\pink_MarkerG.png" />
+    <Content Include="Content\MapIcons\pink_MarkerH.png" />
+    <Content Include="Content\MapIcons\pink_MarkerI.png" />
+    <Content Include="Content\MapIcons\pink_MarkerJ.png" />
+    <Content Include="Content\MapIcons\pink_MarkerK.png" />
+    <Content Include="Content\MapIcons\pink_MarkerL.png" />
+    <Content Include="Content\MapIcons\pink_MarkerM.png" />
+    <Content Include="Content\MapIcons\pink_MarkerN.png" />
+    <Content Include="Content\MapIcons\pink_MarkerO.png" />
+    <Content Include="Content\MapIcons\pink_MarkerP.png" />
+    <Content Include="Content\MapIcons\pink_MarkerQ.png" />
+    <Content Include="Content\MapIcons\pink_MarkerR.png" />
+    <Content Include="Content\MapIcons\pink_MarkerS.png" />
+    <Content Include="Content\MapIcons\pink_MarkerT.png" />
+    <Content Include="Content\MapIcons\pink_MarkerU.png" />
+    <Content Include="Content\MapIcons\pink_MarkerV.png" />
+    <Content Include="Content\MapIcons\pink_MarkerW.png" />
+    <Content Include="Content\MapIcons\pink_MarkerX.png" />
+    <Content Include="Content\MapIcons\pink_MarkerY.png" />
+    <Content Include="Content\MapIcons\pink_MarkerZ.png" />
+    <Content Include="Content\MapIcons\purple_MarkerA.png" />
+    <Content Include="Content\MapIcons\purple_MarkerB.png" />
+    <Content Include="Content\MapIcons\purple_MarkerC.png" />
+    <Content Include="Content\MapIcons\purple_MarkerD.png" />
+    <Content Include="Content\MapIcons\purple_MarkerE.png" />
+    <Content Include="Content\MapIcons\purple_MarkerF.png" />
+    <Content Include="Content\MapIcons\purple_MarkerG.png" />
+    <Content Include="Content\MapIcons\purple_MarkerH.png" />
+    <Content Include="Content\MapIcons\purple_MarkerI.png" />
+    <Content Include="Content\MapIcons\purple_MarkerJ.png" />
+    <Content Include="Content\MapIcons\purple_MarkerK.png" />
+    <Content Include="Content\MapIcons\purple_MarkerL.png" />
+    <Content Include="Content\MapIcons\purple_MarkerM.png" />
+    <Content Include="Content\MapIcons\purple_MarkerN.png" />
+    <Content Include="Content\MapIcons\purple_MarkerO.png" />
+    <Content Include="Content\MapIcons\purple_MarkerP.png" />
+    <Content Include="Content\MapIcons\purple_MarkerQ.png" />
+    <Content Include="Content\MapIcons\purple_MarkerR.png" />
+    <Content Include="Content\MapIcons\purple_MarkerS.png" />
+    <Content Include="Content\MapIcons\purple_MarkerT.png" />
+    <Content Include="Content\MapIcons\purple_MarkerU.png" />
+    <Content Include="Content\MapIcons\purple_MarkerV.png" />
+    <Content Include="Content\MapIcons\purple_MarkerW.png" />
+    <Content Include="Content\MapIcons\purple_MarkerX.png" />
+    <Content Include="Content\MapIcons\purple_MarkerY.png" />
+    <Content Include="Content\MapIcons\purple_MarkerZ.png" />
+    <Content Include="Content\MapIcons\red_MarkerA.png" />
+    <Content Include="Content\MapIcons\red_MarkerB.png" />
+    <Content Include="Content\MapIcons\red_MarkerC.png" />
+    <Content Include="Content\MapIcons\red_MarkerD.png" />
+    <Content Include="Content\MapIcons\red_MarkerE.png" />
+    <Content Include="Content\MapIcons\red_MarkerF.png" />
+    <Content Include="Content\MapIcons\red_MarkerG.png" />
+    <Content Include="Content\MapIcons\red_MarkerH.png" />
+    <Content Include="Content\MapIcons\red_MarkerI.png" />
+    <Content Include="Content\MapIcons\red_MarkerJ.png" />
+    <Content Include="Content\MapIcons\red_MarkerK.png" />
+    <Content Include="Content\MapIcons\red_MarkerL.png" />
+    <Content Include="Content\MapIcons\red_MarkerM.png" />
+    <Content Include="Content\MapIcons\red_MarkerN.png" />
+    <Content Include="Content\MapIcons\red_MarkerO.png" />
+    <Content Include="Content\MapIcons\red_MarkerP.png" />
+    <Content Include="Content\MapIcons\red_MarkerQ.png" />
+    <Content Include="Content\MapIcons\red_MarkerR.png" />
+    <Content Include="Content\MapIcons\red_MarkerS.png" />
+    <Content Include="Content\MapIcons\red_MarkerT.png" />
+    <Content Include="Content\MapIcons\red_MarkerU.png" />
+    <Content Include="Content\MapIcons\red_MarkerV.png" />
+    <Content Include="Content\MapIcons\red_MarkerW.png" />
+    <Content Include="Content\MapIcons\red_MarkerX.png" />
+    <Content Include="Content\MapIcons\red_MarkerY.png" />
+    <Content Include="Content\MapIcons\red_MarkerZ.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerA.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerB.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerC.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerD.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerE.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerF.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerG.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerH.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerI.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerJ.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerK.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerL.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerM.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerN.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerO.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerP.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerQ.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerR.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerS.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerT.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerU.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerV.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerW.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerX.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerY.png" />
+    <Content Include="Content\MapIcons\yellow_MarkerZ.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Content\MapIcons\markers.psd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -249,7 +532,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -283,7 +568,12 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Scanner\Index.cshtml" />
+    <Content Include="Views\Map\Index.cshtml" />
+    <Content Include="Views\Generals\Create.cshtml" />
+    <Content Include="Views\Generals\Delete.cshtml" />
+    <Content Include="Views\Generals\Details.cshtml" />
+    <Content Include="Views\Generals\Edit.cshtml" />
+    <Content Include="Views\Generals\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -304,6 +594,24 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
