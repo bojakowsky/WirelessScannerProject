@@ -7,3 +7,13 @@ C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Databa
 C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Release\EntityFramework.SqlServer.xml
 C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\obj\Release\Database.dll
 C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\obj\Release\Database.pdb
+D:\!!!Workspace\Wireles_Scanner\25-04\WirelessScannerProject\EnvScannerManagement\Database\bin\Release\Database.dll.config
+D:\!!!Workspace\Wireles_Scanner\25-04\WirelessScannerProject\EnvScannerManagement\Database\bin\Release\Database.dll
+D:\!!!Workspace\Wireles_Scanner\25-04\WirelessScannerProject\EnvScannerManagement\Database\bin\Release\Database.pdb
+D:\!!!Workspace\Wireles_Scanner\25-04\WirelessScannerProject\EnvScannerManagement\Database\bin\Release\EntityFramework.dll
+D:\!!!Workspace\Wireles_Scanner\25-04\WirelessScannerProject\EnvScannerManagement\Database\bin\Release\EntityFramework.SqlServer.dll
+D:\!!!Workspace\Wireles_Scanner\25-04\WirelessScannerProject\EnvScannerManagement\Database\bin\Release\EntityFramework.xml
+D:\!!!Workspace\Wireles_Scanner\25-04\WirelessScannerProject\EnvScannerManagement\Database\bin\Release\EntityFramework.SqlServer.xml
+D:\!!!Workspace\Wireles_Scanner\25-04\WirelessScannerProject\EnvScannerManagement\Database\obj\Release\Database.csprojResolveAssemblyReference.cache
+D:\!!!Workspace\Wireles_Scanner\25-04\WirelessScannerProject\EnvScannerManagement\Database\obj\Release\Database.dll
+D:\!!!Workspace\Wireles_Scanner\25-04\WirelessScannerProject\EnvScannerManagement\Database\obj\Release\Database.pdb
