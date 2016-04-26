@@ -392,7 +392,9 @@ public class MainActivity extends Activity {
     class WifiReceiver extends BroadcastReceiver {
 
         public void onReceive(Context c, Intent intent) {
-            wifiScanResultList = mainWifi.getScanResults();
+            if (wifiSwitch.isChecked())
+                wifiScanResultList = mainWifi.getScanResults();
+
         }
     }
 
