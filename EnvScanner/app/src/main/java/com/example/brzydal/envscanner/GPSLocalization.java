@@ -39,7 +39,8 @@ public class GPSLocalization implements LocationListener {
 
     @Override
     public void onProviderDisabled(String provider) {
-        // TODO Auto-generated method stub
+        latitude = 0;
+        longitude = 0;
 
     }
 

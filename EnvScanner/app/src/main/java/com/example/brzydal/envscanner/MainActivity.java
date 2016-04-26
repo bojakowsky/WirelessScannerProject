@@ -105,6 +105,18 @@ public class MainActivity extends Activity {
         bluetoothButton = (Button) findViewById(R.id.bluetoothButton);
     }
 
+    public void EnableButton(Button button)
+    {
+        button.setEnabled(true);
+        button.setAlpha(1);
+    }
+
+    public void DisableButton(Button button)
+    {
+        button.setEnabled(false);
+        button.setAlpha(0.1f);
+    }
+
     public void InitializeGPS(){
         GPSLocalizer = new GPSLocalization(this);
 
@@ -145,6 +157,16 @@ public class MainActivity extends Activity {
 
         mainWifi.startScan();
     }
+    public void WifiDeconfiguration(){
+        Toast.makeText(getApplicationContext(), "Wifi is now disabled.",
+                Toast.LENGTH_LONG).show();
+        mainWifi.setWifiEnabled(false);
+        mainWifi.disconnect();
+        wifiScanResultList.clear();
+        PrintScanningData();
+
+        DisableButton(wifiButton);
+    }
 
     public void BluetoothConfiguration()
     {
@@ -164,18 +186,34 @@ public class MainActivity extends Activity {
 
             bluetoothAdapter.enable();
         }
+
         bluetoothAdapter.startDiscovery();
+    }
+
+    public void BluetoothDeconfiguration(){
+        Toast.makeText(getApplicationContext(), "Bluetooth is now disabled.",
+                Toast.LENGTH_LONG).show();
+
+        bluetoothAdapter.cancelDiscovery();
+        bluetoothAdapter.disable();
+        bluetoothScanResultList.clear();
+        PrintScanningData();
+
+        DisableButton(bluetoothButton);
     }
 
     public void InitializeWifi()
     {
-
-        wifiButton.setEnabled(false);
+        DisableButton(wifiButton);
         //Check change listener - user click
         wifiSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     WifiConfiguration();
+                }
+                else
+                {
+                    WifiDeconfiguration();
                 }
             }
         });
@@ -193,13 +231,15 @@ public class MainActivity extends Activity {
 
     public void InitializeBluetooth()
     {
-
-        bluetoothButton.setEnabled(false);
+        DisableButton(bluetoothButton);
         //Listener on check changed - user click on slider
         bluetoothSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     BluetoothConfiguration();
+                }
+                else {
+                    BluetoothDeconfiguration();
                 }
             }
         });
@@ -235,23 +275,22 @@ public class MainActivity extends Activity {
             @Override
             public void run() {
 
-                if (wifiScanResultList.size() < 1) {
-                    wifiButton.setEnabled(false);
-                } else {
-                    wifiButton.setEnabled(true);
-                }
+                if (wifiScanResultList.size() < 1)
+                    DisableButton(wifiButton);
+                else
+                    EnableButton(wifiButton);
 
-                if (bluetoothScanResultList.size() < 1) {
-                    bluetoothButton.setEnabled(false);
-                } else {
-                    bluetoothButton.setEnabled(true);
-                }
+                if (bluetoothScanResultList.size() < 1)
+                    DisableButton(bluetoothButton);
+                else
+                    EnableButton(bluetoothButton);
 
-                PrintScanningData();
                 if (wifiSwitch.isChecked())
                     mainWifi.startScan();
                 if (bluetoothSwitch.isChecked())
                     bluetoothAdapter.startDiscovery();
+
+                PrintScanningData();
                 SendDataAsyncToServer();
                 doScanning();
             }
@@ -266,46 +305,45 @@ public class MainActivity extends Activity {
 
     protected void SendDataAsyncToServer()
     {
-        JSONSerializableAndroidData dataToSend = new JSONSerializableAndroidData();
-        //Id and general
-        dataToSend.setId(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID).toString());
-        dataToSend.setAndroidAPI(String.valueOf(android.os.Build.VERSION.SDK));
-        dataToSend.setNumberOfBtConnections(bluetoothScanResultList.size());
-        dataToSend.setNumberOfWifiConnections(wifiScanResultList.size());
-        dataToSend.setDateAndTime(getDateTime());
-        dataToSend.setGPSlatitude(GPSLocalizer.latitude);
-        dataToSend.setGPSLongtitude(GPSLocalizer.longitude);
-        //wifi
-        List<Wifi> wifiListToAdd = new ArrayList<>();
-        for (ScanResult wifi: wifiScanResultList)
-        {
-            Wifi wifiToAdd = new Wifi();
-            wifiToAdd.setBSSID(wifi.BSSID);
-            wifiToAdd.setFrequency(wifi.frequency);
-            wifiToAdd.setLevel(wifi.level);
-            wifiToAdd.setSecurity(wifi.capabilities);
-            wifiToAdd.setSSID(wifi.SSID);
-            wifiToAdd.setTimestamp(String.valueOf(wifi.timestamp));
-            wifiListToAdd.add(wifiToAdd);
+        if ((GPSLocalizer.latitude != 0 && GPSLocalizer.longitude != 0) && (wifiSwitch.isChecked() || bluetoothSwitch.isChecked())) {
+            JSONSerializableAndroidData dataToSend = new JSONSerializableAndroidData();
+            //Id and general
+            dataToSend.setId(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID).toString());
+            dataToSend.setAndroidAPI(String.valueOf(android.os.Build.VERSION.SDK));
+            dataToSend.setNumberOfBtConnections(bluetoothScanResultList.size());
+            dataToSend.setNumberOfWifiConnections(wifiScanResultList.size());
+            dataToSend.setDateAndTime(getDateTime());
+            dataToSend.setGPSlatitude(GPSLocalizer.latitude);
+            dataToSend.setGPSLongtitude(GPSLocalizer.longitude);
+            //wifi
+            List<Wifi> wifiListToAdd = new ArrayList<>();
+            for (ScanResult wifi : wifiScanResultList) {
+                Wifi wifiToAdd = new Wifi();
+                wifiToAdd.setBSSID(wifi.BSSID);
+                wifiToAdd.setFrequency(wifi.frequency);
+                wifiToAdd.setLevel(wifi.level);
+                wifiToAdd.setSecurity(wifi.capabilities);
+                wifiToAdd.setSSID(wifi.SSID);
+                wifiToAdd.setTimestamp(String.valueOf(wifi.timestamp));
+                wifiListToAdd.add(wifiToAdd);
+            }
+            dataToSend.setWifis(wifiListToAdd);
+
+            //bluetooth
+            List<Bluetooth> btListToAdd = new ArrayList<>();
+            for (BluetoothDevice bluetooth : bluetoothScanResultList) {
+                Bluetooth btToAdd = new Bluetooth();
+                btToAdd.setDeviceName(bluetooth.getName());
+                btToAdd.setMAC(bluetooth.getAddress());
+                btListToAdd.add(btToAdd);
+            }
+            dataToSend.setBluetooths(btListToAdd);
+
+
+            AsyncDataSend dataSender = new AsyncDataSend();
+            dataSender.AndroidData = dataToSend;
+            dataSender.execute();
         }
-        dataToSend.setWifis(wifiListToAdd);
-
-        //bluetooth
-        List<Bluetooth> btListToAdd = new ArrayList<>();
-        for (BluetoothDevice bluetooth: bluetoothScanResultList)
-        {
-            Bluetooth btToAdd = new Bluetooth();
-            btToAdd.setDeviceName(bluetooth.getName());
-            btToAdd.setMAC(bluetooth.getAddress());
-            btListToAdd.add(btToAdd);
-        }
-        dataToSend.setBluetooths(btListToAdd);
-
-
-        AsyncDataSend dataSender = new AsyncDataSend();
-        dataSender.AndroidData = dataToSend;
-        dataSender.execute();
-
     }
     protected void PrintScanningData() {
         wifiText.setText(String.valueOf(wifiScanResultList.size()));
