@@ -11,6 +11,7 @@ using Database;
 
 namespace EnvScannerManagement.Controllers
 {
+    [Authorize(Roles = "OkUser, Admin")]
     public class WifiController : Controller
     {
         private DatabaseContext db = new DatabaseContext();

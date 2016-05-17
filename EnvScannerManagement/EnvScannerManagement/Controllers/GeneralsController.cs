@@ -11,11 +11,14 @@ using Database;
 
 namespace EnvScannerManagement.Controllers
 {
+
+    [Authorize(Roles = "OkUser, Admin")]
     public class GeneralsController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
 
         // GET: Generals
+
         public async Task<ActionResult> Index()
         {
             var generals = db.Generals.Include(g => g.Device);

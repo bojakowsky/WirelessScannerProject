@@ -11,6 +11,7 @@ using Database;
 
 namespace EnvScannerManagement.Controllers
 {
+    [Authorize(Roles = "OkUser, Admin")]
     public class DeviceController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
@@ -43,6 +44,7 @@ namespace EnvScannerManagement.Controllers
 
 
         // GET: Device/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(string id)
         {
             if (id == null)
@@ -60,6 +62,7 @@ namespace EnvScannerManagement.Controllers
         // POST: Device/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles ="Admin")]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
             Device device = await db.Devices.FindAsync(id);

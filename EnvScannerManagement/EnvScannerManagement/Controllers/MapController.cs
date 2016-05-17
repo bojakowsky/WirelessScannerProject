@@ -9,8 +9,8 @@ using System.Web.Mvc;
 
 namespace EnvScannerManagement.Controllers
 {
-    
 
+    [Authorize(Roles = "OkUser, Admin")]
     public class MapController : Controller
     {
 

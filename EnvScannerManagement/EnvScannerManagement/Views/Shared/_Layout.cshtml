@@ -24,8 +24,22 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Map", "index", "Map")</li>
+                    
+                    <!--<li>@Html.ActionLink("Home", "Index", "Home")</li>-->
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Map", "Index", "Map")</li>
+                        <li>@Html.ActionLink("Device", "Index", "Device")</li>
+                        <li>@Html.ActionLink("General", "Index", "Generals")</li>
+                        <li>@Html.ActionLink("Wifi", "Index", "Wifi")</li>
+                        <li>@Html.ActionLink("Bluetooth", "Index", "Bluetooth")</li>
+                    }
+                    @if (HttpContext.Current.User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("User management", "UsersManagement", "Account")</li>
+                    }
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

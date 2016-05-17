@@ -11,6 +11,7 @@ using Database;
 
 namespace EnvScannerManagement.Controllers
 {
+    [Authorize(Roles = "OkUser, Admin")]
     public class BluetoothController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
@@ -20,7 +21,7 @@ namespace EnvScannerManagement.Controllers
         {
             var bluetooths = db.Bluetooths.Include(b => b.General);
             return View(await bluetooths.OrderByDescending(x=>x.Id).Take(1000).ToListAsync());
-        }    
+        }
 
         protected override void Dispose(bool disposing)
         {

@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using EnvScannerManagement.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace EnvScannerManagement
 {
@@ -63,6 +64,9 @@ namespace EnvScannerManagement
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+
+
+            
         }
     }
 }

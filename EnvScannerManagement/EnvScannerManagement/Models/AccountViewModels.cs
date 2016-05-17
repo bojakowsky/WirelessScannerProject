@@ -109,4 +109,15 @@ namespace EnvScannerManagement.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
+    public class UsersViewModel
+    {
+        public List<UserViewModel> Users;
+    }
+
+    public class UserViewModel
+    {
+        public string Email { get; set; }
+        public bool HasPrivilages { get; set; }
+    }
 }

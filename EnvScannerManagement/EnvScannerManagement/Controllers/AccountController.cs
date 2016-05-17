@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using EnvScannerManagement.Models;
+using System.Collections.Generic;
 
 namespace EnvScannerManagement.Controllers
 {
@@ -422,6 +423,37 @@ namespace EnvScannerManagement.Controllers
 
             base.Dispose(disposing);
         }
+
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult UsersManagement()
+        {
+            UsersViewModel users = new UsersViewModel();
+            users.Users = UserManager.Users.Select(x => new UserViewModel()
+            {
+                Email = x.Email,
+                HasPrivilages = x.Roles.Any()
+            }).ToList();
+
+            return View(users);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public ActionResult GiveUserPermission(string email)
+        {   
+            UserManager.AddToRole(UserManager.FindByName(email).Id, "OkUser");
+            return RedirectToAction("UsersManagement", "Account");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public ActionResult DeleteUser(string email)
+        {
+            UserManager.Delete(UserManager.FindByName(email));
+            return RedirectToAction("UsersManagement", "Account");
+        }
+
 
         #region Helpers
         // Used for XSRF protection when adding external logins
