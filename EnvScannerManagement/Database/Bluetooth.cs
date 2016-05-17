@@ -15,4 +15,11 @@ namespace Database
         public int GeneralId { get; set; }
         public virtual General General { get; set; }
     }
+
+    public class DTOBluetooth
+    {
+        public string MAC { get; set; }
+        public string DeviceName { get; set; }
+        public int GeneralId { get; set; }
+    }
 }

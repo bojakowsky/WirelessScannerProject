@@ -3,13 +3,16 @@
 @{
     Layout = null;
 }
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Simple Map</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/jquery.datetimepicker.min.css")
     <style>
         html, body {
             height: 100%;
@@ -22,43 +25,107 @@
         }
 
         .floating-panel {
-            position: absolute;
-            left: 0.5%;
-            z-index: 5;
             background-color: #fff;
-            padding: 5px;
             border: 1px solid #999;
-            text-align: center;
-            font-family: 'Roboto','sans-serif';
+            left: 10px;
+            padding: 5px;
+            position: absolute;
+            top: 70px;
+            z-index: 5;
         }
 
-        .main-panel {
-            top: 4.1%;
+        .floating-panel1 {
+            background-color: #fff;
+            border: 1px solid #999;
+            left: 10px;
+            padding: 5px;
+            position: absolute;
+            top: 265px;
+            z-index: 5;
         }
 
-        .marker-panel {
-            top: 7.4%;
+        .floating-panel2 {
+            background-color: #fff;
+            border: 1px solid #999;
+            left: 10px;
+            padding: 5px;
+            position: absolute;
+            top: 388px;
+            z-index: 5;
         }
 
-        .marker-nextprev-panel {
-            top: 10.9%;
+        .floating-panel3 {
+            background-color: #fff;
+            border: 1px solid #999;
+            left: 10px;
+            padding: 5px;
+            position: absolute;
+            top: 480px;
+            z-index: 5;
+        }
+
+
+        .insider {
+            padding: 3px;
         }
     </style>
 </head>
 <body>
-    <div class="floating-panel main-panel" id="MainPanel">
+    <div class="floating-panel">
+
+        <!-- id="MainPanel"
         <input onchange="togglePanelVisibility();" type="checkbox" value="Hide Panels" />
+        <div id="MarkerPanel"> -->
+        filter markers
+        <div class="insider"><input onclick="clearMarkers();" type=button value="Hide" style="width: 75px"></div>
+        <div class="insider"><input onclick="showMarkers();" type=button value="All" style="width: 75px"></div>
+        <div class="insider"><input onclick="showEmpties();" type=button value="Empty" style="width: 75px"></div>
+        <div class="insider"><input onclick="showWifis();" type=button value="WiFi" style="width: 75px"></div>
+        <div class="insider"><input onclick="showBluetooths();" type=button value="Bluetooth" style="width: 75px"></div>
     </div>
-    <div class="floating-panel marker-panel" id="MarkerPanel">
-        <input onclick="clearMarkers();" type=button value="Hide Markers">
-        <input onclick="showMarkers();" type=button value="Show Markers">
+
+    <div class="floating-panel1">
+            Filter date & time
+            <div>
+                <div> <input type="text" name="filter-date" id="filter-date-from" /> </div> 
+                <div style="height: 5px"></div>
+                <div> <input type="text" name="filter-date" id="filter-date-to" /> </div>
+                <div style="height: 5px"></div>
+            </div>
+
+            <div>
+                <input type="button" value="Filter" onclick="filterDateAndTime()" />
+            </div>
     </div>
+
+    <div class="floating-panel2">
+        Find device
+        <div>
+            <div> <input type="text" id="deviceId"/> </div>
+            <div style="height: 5px"></div>
+            <div>
+                <input type="button" value="Find" onclick="filterByDeviceId()" />
+            </div>
+        </div>
+    </div>
+
+    <div class="floating-panel3">
+        Go to lat, lang
+        <div>
+            <div> <input type="text" id="lat" /> </div>
+            <div style="height: 5px"></div>
+            <div> <input type="text" id="lang" /> </div>
+            <div style="height: 5px"></div>
+            <div>
+                <input type="button" value="Go" onclick="goToLatLang()" />
+            </div>
+        </div>
+    </div>
+
 
     <div id="map"></div>
-
+    
     <script>
-
-
         //Google Maps API map, markers, infoWindows initialization
         var data;
         var map;
@@ -66,6 +133,55 @@
         data = @Html.Raw(JsonConvert.SerializeObject(this.Model, new JsonSerializerSettings {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
         }));
+
+        function showMore(data){
+            if (data.NumberOfWifiConnections > 0)
+                $.ajax({
+                    type: 'GET',
+                    url: 'Map/GetDetails',
+                    contentType: 'json',
+                    data: { generalId: data.Id },
+                    success: function(response, textStatus, jqXHR){
+                        addResponseToContent(response)
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        // error occured, no need to be handled
+                    }
+                });
+        }
+
+        function addResponseToContent(response){
+            content = ""
+            if (response.wifi.length > 0){
+                content += "<br/><br/> Wifis attached <br/> "
+                content += "__________________________ <br/>"
+                for (var j = 0 ; j < response.wifi.length; j++)
+                {
+                    content = content + "<br/>"
+                    + "BSSID:" + response.wifi[j].BSSID + "<br/>"
+                    + "SSID:" + response.wifi[j].SSID + "<br/>"
+                    + "Security:" + response.wifi[j].Security + "<br/>"
+                    + "Frequency:" + response.wifi[j].Frequency + "<br/>"
+                    + "Level:" + response.wifi[j].Level + "<br/>"
+                    + "Timestamp:" + response.wifi[j].Timestamp + "<br/>"
+                    + "____ <br/>"
+                }
+            }
+
+
+            if (response.bt.length > 0){
+                content += "<br/><br/> Bluetooths attached <br/>"
+                content += "__________________________ <br/>"
+                for (var j = 0 ; j < response.bt.length; j++)
+                {
+                    content = content + "<br/>"
+                    + "BSSID:" + response.bt[j].DeviceName + "<br/>"
+                    + "SSID:" + response.bt[j].MAC + "<br/>"
+                    + "____ <br/>"
+                }
+            }
+            infowindow.setContent(infowindow.content + content)
+        }
 
         function initMap() {
             var latlng = new google.maps.LatLng(data[0].GPSlatitude, data[0].GPSLongtitude);
@@ -98,32 +214,17 @@
                 (function (i, marker) {
 
                     google.maps.event.addListener(marker, 'click', function () {
+                        if (typeof infowindow !== 'undefined') infowindow.close()
                         infowindow = new google.maps.InfoWindow();
                         var content =
                             "Device Id: " + data[i].DeviceId + "<br/>"
                             +"Latitude: " + data[i].GPSlatitude + "<br/>"
                             +"Longtitude: " + data[i].GPSLongtitude + "<br/>"
-                            +"Date and time: " + data[i].DateAndTime + "<br/>"
+                            +"Date and time: " + new Date(data[i].DateAndTime) + "<br/>"
                             +"No. wifi connections: " + data[i].NumberOfWifiConnections + "<br/>"
                             +"No. bluetooth connections: " + data[i].NumberOfBtConnections + "<br/>"
-                        if (data[i].Wifis != null && data[i].Wifis.length > 0)
-                            for (var j = 0 ; j < data[i].Wifis.length; j++)
-                            {
-                                content = content + "<br/>"
-                                + "BSSID:" + data[i].Wifis[j].BSSID + "<br/>"
-                                + "SSID:" + data[i].Wifis[j].SSID + "<br/>"
-                                + "Security:" + data[i].Wifis[j].Security + "<br/>"
-                                + "Frequency:" + data[i].Wifis[j].Frequency + "<br/>"
-                                + "Level:" + data[i].Wifis[j].Level + "<br/>"
-                                + "Timestamp:" + data[i].Wifis[j].Timestamp + "<br/>"
-                            }
-                        if (data[i].Bluetooths != null && data[i].Bluetooths.length > 0)
-                            for (var j = 0 ; j < data[i].Bluetooths.length; j++)
-                            {
-                                content = content + "<br/>"
-                                + "BSSID:" + data[i].Bluetooths[j].DeviceName + "<br/>"
-                                + "SSID:" + data[i].Bluetooths[j].MAC + "<br/>"
-                            }
+                            +"<a href='#' onclick='return showMore(data["+i+"]);'>Show more</a>"
+
                         infowindow.setContent(content);
                         infowindow.open(map, marker);
 
@@ -138,6 +239,30 @@
         function setMapOnAll(map) {
             for (var i = 0; i < markers.length; i++) {
                 markers[i].setMap(map);
+            }
+        }
+
+        function showWifis(){
+            for (var i = 0; i < markers.length; i++) {
+                if (data[i].NumberOfWifiConnections > 0)
+                    markers[i].setMap(map);
+                else markers[i].setMap(null);
+            }
+        }
+
+        function showBluetooths(){
+            for (var i = 0; i < markers.length; i++) {
+                if (data[i].NumberOfBtConnections > 0)
+                    markers[i].setMap(map);
+                else markers[i].setMap(null);
+            }
+        }
+
+        function showEmpties(map){
+            for (var i = 0; i < markers.length; i++) {
+                if (data[i].NumberOfWifiConnections == 0 && data[i].NumberOfBtConnections == 0)
+                    markers[i].setMap(map);
+                else markers[i].setMap(null);
             }
         }
 
@@ -158,8 +283,46 @@
         function showMarkers(){
             setMapOnAll(map);
         }
+
+        function filterDateAndTime(){
+            dateFrom = new Date($("#filter-date-from").val())
+            dateTo = new Date($("#filter-date-to").val())
+            for (var i = 0; i < markers.length; i++) {
+                d = new Date(data[i].DateAndTime)
+                if (d >= dateFrom && d <= dateTo)
+                    markers[i].setMap(map);
+                else markers[i].setMap(null);
+            }
+        }
+
+        function filterByDeviceId(){
+            devId = $("#deviceId").val()
+            for (var i = 0; i < markers.length; i++) {
+                if (devId == data[i].DeviceId)
+                    markers[i].setMap(map);
+                else markers[i].setMap(null);
+            }
+        }
+
+        function goToLatLang(){
+            lat = $("#lat").val()
+            lang = $("#lang").val()
+            
+            if (!isNaN(lat) && !isNaN(lang))
+                map.setCenter(new google.maps.LatLng(lat, lang))
+        }
+
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4f8WgskI1t9Np7UVijjIQY4LF54yObA4&callback=initMap"
             async defer></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Content/jquery.datetimepicker.full.js")
+    <script>
+        jQuery(document).ready(function () {
+            'use strict';
+
+            jQuery('#filter-date-from, #filter-date-to, #search-from-date, #search-to-date').datetimepicker();
+        });
+    </script>
 </body>
 </html>

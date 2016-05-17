@@ -23,15 +23,13 @@
         <div class="row  animated fadeInDown">
             <div class="col-lg-4 col-lg-offset-4 text-center"><img class="login-logo" src="~/images/logo.svg" /></div>
         </div>
-
         <div class="row m-t-md text-center animated fadeInUp">
             <div class="col-lg-4 col-lg-offset-4">
-
                 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
                     @Html.AntiForgeryToken()
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
                     <fieldset>
-
                         <!-- Text input-->
                         <div class="form-group">
                             <div class="col-xs-12">
@@ -39,44 +37,35 @@
                                 @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <!-- Password input-->
                         <div class="form-group">
                             <div class="col-xs-12">
                                 @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
                                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-
                             </div>
                         </div>
-
                         <div class="form-group">
                             <div class="col-xs-12">
                                 @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Password confirm" })
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
                             </div>
                         </div>
-          <!-- Button -->
+                        <!-- Button -->
                         <div class="form-group">
                             <div class="col-xs-12">
-
                                 <input type="submit" value="Register" class="btn btn-primary btn-block" />
                             </div>
                         </div>
-
                     </fieldset>
                 }
                 <p class="text-muted">Do you have an Account?</p>@Html.ActionLink("Log in.", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
             </div>
-
         </div>
     </div>
-
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
 </body>
 </html>
-
-
