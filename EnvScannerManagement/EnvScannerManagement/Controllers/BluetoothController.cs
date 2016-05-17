@@ -11,16 +11,16 @@ using Database;
 
 namespace EnvScannerManagement.Controllers
 {
-    public class GeneralsController : Controller
+    public class BluetoothController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
 
-        // GET: Generals
+        // GET: Bluetooth
         public async Task<ActionResult> Index()
         {
-            var generals = db.Generals.Include(g => g.Device);
-            return View(await generals.OrderByDescending(x => x.Id).Take(1000).ToListAsync());
-        }
+            var bluetooths = db.Bluetooths.Include(b => b.General);
+            return View(await bluetooths.OrderByDescending(x=>x.Id).Take(1000).ToListAsync());
+        }    
 
         protected override void Dispose(bool disposing)
         {

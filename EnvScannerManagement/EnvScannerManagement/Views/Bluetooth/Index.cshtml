@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Database.Bluetooth>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Bluetooth data</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Device name
+        </th>
+        <th>
+            MAC
+        </th>
+        <th>
+            Sender android ID
+        </th>
+        <th>
+            General ID
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeviceName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MAC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.General.DeviceId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GeneralId)
+        </td>
+    </tr>
+}
+
+</table>

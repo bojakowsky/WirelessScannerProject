@@ -11,15 +11,15 @@ using Database;
 
 namespace EnvScannerManagement.Controllers
 {
-    public class GeneralsController : Controller
+    public class WifiController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
 
-        // GET: Generals
+        // GET: Wifis
         public async Task<ActionResult> Index()
         {
-            var generals = db.Generals.Include(g => g.Device);
-            return View(await generals.OrderByDescending(x => x.Id).Take(1000).ToListAsync());
+            var wifis = db.Wifis.Include(w => w.General);
+            return View(await wifis.OrderByDescending(x => x.Id).Take(1000).ToListAsync());
         }
 
         protected override void Dispose(bool disposing)
