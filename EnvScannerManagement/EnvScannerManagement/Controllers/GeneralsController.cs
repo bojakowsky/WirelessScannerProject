@@ -19,9 +19,29 @@ namespace EnvScannerManagement.Controllers
 
         // GET: Generals
 
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string searchValue = "")
         {
-            var generals = db.Generals.Include(g => g.Device);
+            if (searchValue == null)
+                return RedirectToAction("Index");
+            var generals = db.Generals.AsQueryable();
+
+            long searchLongValue;
+            long.TryParse(searchValue, out searchLongValue);
+
+            if (searchLongValue != 0 || (searchValue.Equals("0") && searchLongValue == 0))
+            {
+                generals = generals.Where(x => x.NumberOfWifiConnections == searchLongValue ||
+                    x.Id == searchLongValue || 
+                    x.NumberOfBtConnections == searchLongValue || 
+                    (long)x.GPSLongtitude == searchLongValue || 
+                    (long)x.GPSlatitude == searchLongValue);
+            }
+            else {
+                generals = generals.Where(x =>
+                    x.AndroidAPI.Contains(searchValue) ||
+                    x.DateAndTime.ToString().Contains(searchValue) ||
+                    x.DeviceId.Contains(searchValue));
+            }
             return View(await generals.OrderByDescending(x => x.Id).Take(1000).ToListAsync());
         }
 

@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Database;
+using System.Reflection;
 
 namespace EnvScannerManagement.Controllers
 {
@@ -17,9 +18,30 @@ namespace EnvScannerManagement.Controllers
         private DatabaseContext db = new DatabaseContext();
 
         // GET: Wifis
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string searchValue = "")
         {
-            var wifis = db.Wifis.Include(w => w.General);
+            if (searchValue == null)
+                return RedirectToAction("Index");
+            var wifis = db.Wifis.Include(w => w.General).AsQueryable();
+
+            long searchLongValue;
+            long.TryParse(searchValue, out searchLongValue);
+
+            if (searchLongValue != 0 || (searchValue.Equals("0") && searchLongValue == 0))
+            {
+                wifis = wifis.Where(x => x.GeneralId == searchLongValue ||
+                x.Id == searchLongValue ||
+                x.Level == searchLongValue ||
+                x.Frequency == searchLongValue);
+            }
+            else {
+                wifis = wifis.Where(x =>
+                    x.BSSID.Contains(searchValue) ||
+                    x.Security.Contains(searchValue) ||
+                    x.SSID.Contains(searchValue) ||
+                    x.Timestamp.Contains(searchValue));
+            }
+
             return View(await wifis.OrderByDescending(x => x.Id).Take(1000).ToListAsync());
         }
 

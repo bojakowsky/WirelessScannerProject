@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Database;
+using System.Diagnostics;
 
 namespace EnvScannerManagement.Controllers
 {
@@ -19,21 +20,28 @@ namespace EnvScannerManagement.Controllers
         // GET: Device
         public async Task<ActionResult> Index()
         {
+
             DTODevice device = new DTODevice();
             device.Id = await db.Devices.Select(x=>x.Id).ToListAsync();
             var distinctFrequencies = db.Wifis.Select(x => x.Frequency).Distinct();
-            foreach (var freq in distinctFrequencies)
-            {
-                var count = await db.Wifis.CountAsync(x => x.Frequency == freq);
-                device.frequencies.Add(new Frequency()
+            try {
+                foreach (var freq in distinctFrequencies)
                 {
-                    frequency = freq,
-                    numberOfUses = count
-                });
+                    var count = await db.Wifis.Distinct().CountAsync(x => x.Frequency == freq);
+                    device.frequencies.Add(new Frequency()
+                    {
+                        frequency = freq,
+                        numberOfUses = count
+                    });
+                }
+            }
+            catch(Exception e)
+            {
+                Debug.WriteLine(e.Message);
             }
 
-            device.sumOfBluetoothCapture = await db.Bluetooths.CountAsync();
-            device.sumOfWifisCapture = await db.Wifis.CountAsync();
+            device.sumOfBluetoothCapture = await db.Bluetooths.Select(x=>x.MAC).Distinct().CountAsync();
+            device.sumOfWifisCapture = await db.Wifis.Select(x=>x.BSSID).Distinct().CountAsync();
             device.totalCaptures = device.sumOfWifisCapture + device.sumOfBluetoothCapture;
 
             device.uniqueBSSIDCount = await db.Wifis.Select(x => x.BSSID).Distinct().CountAsync();

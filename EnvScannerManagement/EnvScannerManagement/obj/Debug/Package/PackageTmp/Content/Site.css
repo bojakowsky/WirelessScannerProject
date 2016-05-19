@@ -1,0 +1,122 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300&subset=latin,latin-ext);
+body {
+  padding-top: 150px;
+  padding-bottom: 20px;
+  background: #f3f4f4;
+  font-family: 'Open Sans', sans-serif; }
+  body.dark {
+    background: #333;
+    color: white; }
+
+.login-logo {
+  width: 200px;
+  text-align: center; }
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+  padding-left: 15px;
+  padding-right: 15px; }
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+  white-space: normal; }
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+  max-width: 280px; }
+
+.navbar {
+  background: #333333;
+  color: white;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  border: 0; }
+  .navbar .logged a, .navbar .logged i {
+    display: inline-block;
+    vertical-align: middle; }
+  .navbar img.logo {
+    height: 100px;
+    padding: 15px 0;
+    margin-right: 20px; }
+  .navbar .navbar-nav {
+    margin-top: 25px; }
+    .navbar .navbar-nav li {
+      display: inline-block;
+      vertical-align: middle; }
+      .navbar .navbar-nav li > a {
+        display: inline-block;
+        vertical-align: middle;
+        color: white;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 13px; }
+        .navbar .navbar-nav li > a i {
+          display: inline-block;
+          vertical-align: middle; }
+        .navbar .navbar-nav li > a:hover, .navbar .navbar-nav li > a:focus {
+          color: #F2E9EA; }
+
+.m-t-md {
+  margin-top: 50px; }
+
+input {
+  max-width: inherit; }
+
+input, button {
+  border-radius: 0 !important; }
+
+*:focus {
+  outline: none !important; }
+
+.btn-primary {
+  background: #DE473C;
+  color: #F2E9EA; }
+  .btn-primary:hover {
+    background: #C93C39;
+    color: #F2E9EA; }
+
+.btn {
+  border: 0 !important;
+  transition: all ease-in-out 0.3s; }
+
+.btn:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+
+.login-page a {
+  color: white; }
+  .login-page a:hover {
+    text-decoration: none; }
+
+.logged-user-info i.user {
+  font-size: 170px; }
+.logged-user-info strong {
+  color: #DE473C; }
+.logged-user-info dt {
+  text-align: left; }
+
+.home-item {
+  padding: 10px;
+  transition: all ease-in-out 0.3s; }
+  .home-item .inside {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    background: #333;
+    color: white;
+    padding-top: 20px;
+    transition: all ease-in-out 0.3s;
+    cursor: pointer;
+    text-align: center; }
+    .home-item .inside i {
+      font-size: 100px; }
+    .home-item .inside p {
+      padding: 20px;
+      background: white;
+      margin-top: 30px;
+      color: #333; }
+    .home-item .inside:hover {
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+      transition: all ease-in-out 0.3s; }
+
+/*# sourceMappingURL=Site.css.map */

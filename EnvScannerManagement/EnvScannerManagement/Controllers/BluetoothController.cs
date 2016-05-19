@@ -17,10 +17,27 @@ namespace EnvScannerManagement.Controllers
         private DatabaseContext db = new DatabaseContext();
 
         // GET: Bluetooth
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string searchValue = "")
         {
-            var bluetooths = db.Bluetooths.Include(b => b.General);
-            return View(await bluetooths.OrderByDescending(x=>x.Id).Take(1000).ToListAsync());
+            if (searchValue == null)
+                return RedirectToAction("Index");
+            var bts = db.Bluetooths.Include(w => w.General).AsQueryable();
+
+            long searchLongValue;
+            long.TryParse(searchValue, out searchLongValue);
+
+            if (searchLongValue != 0 || (searchValue.Equals("0") && searchLongValue == 0))
+            {
+                bts = bts.Where(x => x.GeneralId == searchLongValue ||
+                x.Id == searchLongValue);
+            }
+            else {
+                bts = bts.Where(x =>
+                    x.DeviceName.Contains(searchValue) ||
+                    x.MAC.Contains(searchValue) || 
+                    x.General.DeviceId.Contains(searchValue));
+            }
+            return View(await bts.OrderByDescending(x => x.Id).Take(1000).ToListAsync());
         }
 
         protected override void Dispose(bool disposing)

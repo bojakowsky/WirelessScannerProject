@@ -27,3 +27,4 @@ C:\Users\BRZYDAL\Desktop\WirelessScannerProject-master\EnvScannerManagement\Data
 C:\Users\BRZYDAL\Desktop\WirelessScannerProject-master\EnvScannerManagement\Database\obj\Release\Database.csprojResolveAssemblyReference.cache
 C:\Users\BRZYDAL\Desktop\WirelessScannerProject-master\EnvScannerManagement\Database\obj\Release\Database.dll
 C:\Users\BRZYDAL\Desktop\WirelessScannerProject-master\EnvScannerManagement\Database\obj\Release\Database.pdb
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\obj\Release\Database.csprojResolveAssemblyReference.cache
