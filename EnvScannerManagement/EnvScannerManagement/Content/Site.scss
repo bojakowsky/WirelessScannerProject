@@ -116,10 +116,11 @@ input, button{
     background: #DE473C;
     color:$logowhite;
 
-    &:hover{
+    &:hover, &:focus{
         
     background: #C93C39;
     color:$logowhite;
+    opacity:0.8;
     }
 }
 .btn{

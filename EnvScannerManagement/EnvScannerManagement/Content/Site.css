@@ -74,9 +74,10 @@ input, button {
 .btn-primary {
   background: #DE473C;
   color: #F2E9EA; }
-  .btn-primary:hover {
+  .btn-primary:hover, .btn-primary:focus {
     background: #C93C39;
-    color: #F2E9EA; }
+    color: #F2E9EA;
+    opacity: 0.8; }
 
 .btn {
   border: 0 !important;
