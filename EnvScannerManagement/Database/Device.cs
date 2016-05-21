@@ -37,6 +37,8 @@ namespace Database
         public int uniqueMACsCount { get; set; }
 
         public int uniqueBSSIDCount { get; set; }
+
+        public int numberOfOpenWifis { get; set; }
        
     }
 

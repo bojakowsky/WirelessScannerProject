@@ -24,6 +24,15 @@ namespace EnvScannerManagement.Controllers
             return View(await generals.AsNoTracking().OrderByDescending(x => x.DateAndTime).ToListAsync());
         }
 
+        public async Task<ActionResult> Hotspots()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            //var generalsIds = db.Wifis.Where(x => x.Security.Equals("[ESS]")).Select(y => y.GeneralId);
+            //var generals = db.Generals.Where(x => generalsIds.Contains(x.Id));
+            var openWifis = db.Wifis.Include(w => w.General).Where(x => x.Security.Equals("[ESS]")).AsQueryable();
+            return View(await openWifis.AsNoTracking().OrderByDescending(x => x.General.DateAndTime).ToListAsync());
+        }
+
         struct WifiAndBluetoothMerged
         {
             public List<DTOBluetooth> bt;
