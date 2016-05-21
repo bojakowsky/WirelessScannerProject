@@ -46,7 +46,11 @@
 <p>Unique BSSID count: @Model.uniqueBSSIDCount</p>
 <hr />
 
-<p>Bluetooth captures: @Model.sumOfBluetoothCapture </p>
-<p>Wifi captures: @Model.sumOfWifisCapture</p>
-<p>Total captures: @Model.totalCaptures</p>
+<p>Unique Bluetooth captures: @Model.sumOfBluetoothCapture </p>
+<p>Unique Wifi captures: @Model.sumOfWifisCapture</p>
+<p>Unique Total captures: @Model.totalCaptures</p>
+<hr/>
+<p>Unique open Wifi count: @Model.numberOfOpenWifis</p>
+<p>Unique open Wifis BSSID: </p>
+@Html.ActionLink("Click to see open wifis", "OpenWifis", "Wifi")
 

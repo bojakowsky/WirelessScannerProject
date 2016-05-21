@@ -6,7 +6,14 @@
 }
 
 <h2>Bluetooth data</h2>
-
+@Html.TextBox("SearchValue", null, new { placeholder = "Search..." })
+<input type="button" value="Search" id="SearchButton" />
+<script>
+    $('#SearchButton').on('click', function () {
+        var url = '@Url.Action("Index", "Bluetooth")';
+        location.href = url + "?searchValue=" + $("#SearchValue").val();
+    });
+</script>
 <table class="table">
     <tr>
         <th>

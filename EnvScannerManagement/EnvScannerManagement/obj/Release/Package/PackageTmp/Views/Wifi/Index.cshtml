@@ -6,6 +6,25 @@
 }
 
 <h2>Wifi data</h2>
+@Html.TextBox("SearchValue", null, new { placeholder = "Search..." })
+<input type="button" value="Search" id="SearchButton" />
+<script>
+    /*$('#SearchButton').on('click', function () {
+        $.ajax({
+            type: 'GET',
+            url: "Wifi/Index",
+            contentType: 'json',
+            data: { searchValue: $("#SearchValue").val() }
+        });
+    });*/
+
+    $('#SearchButton').on('click', function () {
+        var url = '@Url.Action("Index", "Wifi")';
+        location.href = url + "?searchValue=" + $("#SearchValue").val();
+    });
+
+
+</script>
 <table class="table">
     <tr>
         <th>

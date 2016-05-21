@@ -47,6 +47,9 @@ namespace EnvScannerManagement.Controllers
             device.uniqueBSSIDCount = await db.Wifis.Select(x => x.BSSID).Distinct().CountAsync();
             device.uniqueMACsCount = await db.Bluetooths.Select(x => x.MAC).Distinct().CountAsync();
 
+            device.numberOfOpenWifis = await db.Wifis.Where(x => x.Security.Equals("[ESS]")).Select(y => y.BSSID).Distinct().CountAsync();
+            
+           
             return View(device);
         }
 
