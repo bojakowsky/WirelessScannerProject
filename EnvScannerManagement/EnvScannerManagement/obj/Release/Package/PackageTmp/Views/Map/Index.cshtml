@@ -70,90 +70,89 @@
             padding: 3px;
         }
 
-        .fixed-menu{
-                z-index: 9;
+        .fixed-menu {
+            z-index: 9;
             transition: all .5s ease-in-out;
             -webkit-transition: all .5s ease-in-out;
-            background:#333;
-            height:100vh;
-            padding:20px;
+            background: #333;
+            height: 100vh;
+            padding: 20px;
             width: 300px;
-                overflow-y: auto;
-                
+            overflow-y: auto;
             position: fixed;
-            left:-300px;
-            top:0;
+            left: -300px;
+            top: 0;
         }
 
-        .fixed-menu h3{
+            .fixed-menu h3 {
                 display: inline-block;
-    vertical-align: middle;
-    color: white;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 13px;
-        }
-
-        .fixed-menu .logo{
-            width: 50%;
-        
-        }
-
-        .close-menu-on-map{
+                vertical-align: middle;
                 color: white;
-    font-size: 30px;
-    position: absolute;
-    top: 0px;
-    right: 20px;
-    cursor:pointer;
+                font-weight: 700;
+                text-transform: uppercase;
+                font-size: 13px;
+            }
+
+            .fixed-menu .logo {
+                width: 50%;
+            }
+
+        .close-menu-on-map {
+            color: white;
+            font-size: 30px;
+            position: absolute;
+            top: 0px;
+            right: 20px;
+            cursor: pointer;
         }
 
-        .fixed-menu-bar{
+        .fixed-menu-bar {
             position: fixed;
-    z-index: 8;
-    right: 50px;
-    top: 50px;
-    height: 100px;
-    width: 200px;
-    background: #333;
+            z-index: 8;
+            right: 50px;
+            top: 50px;
+            height: 100px;
+            width: 200px;
+            background: #333;
         }
 
-        .fixed-menu-bar .right{
-            padding: 0;
-        }
+            .fixed-menu-bar .right {
+                padding: 0;
+            }
 
-        .fixed-menu-bar .left{
-            cursor:pointer;
+            .fixed-menu-bar .left {
+                cursor: pointer;
                 text-align: center;
-    display: block;
-    line-height: 100px;
-    padding: 0;
-        }
-        .fixed-menu-bar .left:hover .fa-bars{
-            opacity:0.8;
-            transition: all .5s ease-in-out;
-            -webkit-transition: all .5s ease-in-out;
-        }
-        .fixed-menu-bar .fa-bars{
-            transition: all .5s ease-in-out;
-            -webkit-transition: all .5s ease-in-out;
+                display: block;
+                line-height: 100px;
+                padding: 0;
+            }
+
+                .fixed-menu-bar .left:hover .fa-bars {
+                    opacity: 0.8;
+                    transition: all .5s ease-in-out;
+                    -webkit-transition: all .5s ease-in-out;
+                }
+
+            .fixed-menu-bar .fa-bars {
+                transition: all .5s ease-in-out;
+                -webkit-transition: all .5s ease-in-out;
                 color: white;
-    font-size: 38px;
-    display: inline-block;
-    vertical-align: middle;
+                font-size: 38px;
+                display: inline-block;
+                vertical-align: middle;
+            }
 
-        }
-
-        .close-menu{
+        .close-menu {
             transition: all .5s ease-in-out;
             -webkit-transition: all .5s ease-in-out;
         }
 
-        .close-menu:hover{
-            opacity:0.8;
-            transition: all .5s ease-in-out;
-            -webkit-transition: all .5s ease-in-out;
-        }
+            .close-menu:hover {
+                opacity: 0.8;
+                transition: all .5s ease-in-out;
+                -webkit-transition: all .5s ease-in-out;
+            }
     </style>
 </head>
 <body>
@@ -183,6 +182,7 @@
             <div class="col-xs-12" style="margin-top:5px;">
                 <button class="btn btn-primary" onclick="showWifis();"><i class="fa fa-wifi"></i> WiFi</button>
                 <button class="btn btn-primary" onclick="showBluetooths();"><i class="fa fa-bluetooth-b"></i> Bluetooth</button>
+                @Html.ActionLink("Only hotspots", "Hotspots", "Map");
             </div>
         </div>
 
@@ -204,7 +204,7 @@
                 <h3>Device</h3>
             </div>
             <div class="col-xs-12">
-                <input type="text"  class="form-control" placeholder="Device ID" id="deviceId" />
+                <input type="text" class="form-control" placeholder="Device ID" id="deviceId" />
             </div>
             <div class="col-xs-12" style="margin-top:5px;">
                 <button class="btn btn-primary pull-right" onclick="filterByDeviceId()"><i class="fa fa-search"></i> Search</button>
@@ -223,18 +223,18 @@
                 <button class="btn btn-primary pull-right" onclick="goToLatLang()"><i class="fa fa-compass"></i> Go</button>
             </div>
         </div>
-       
+
     </div>
 
-        <!-- id="MainPanel"
-        <input onchange="togglePanelVisibility();" type="checkbox" value="Hide Panels" />
-        <div id="MarkerPanel"> -->
-        
-  
+    <!-- id="MainPanel"
+    <input onchange="togglePanelVisibility();" type="checkbox" value="Hide Panels" />
+    <div id="MarkerPanel"> -->
+
+
 
 
     <div id="map"></div>
-    
+
     <script>
         //Google Maps API map, markers, infoWindows initialization
         var data;
@@ -418,7 +418,7 @@
         function goToLatLang(){
             lat = $("#lat").val()
             lang = $("#lang").val()
-            
+
             if (!isNaN(lat) && !isNaN(lang))
                 map.setCenter(new google.maps.LatLng(lat, lang))
         }
