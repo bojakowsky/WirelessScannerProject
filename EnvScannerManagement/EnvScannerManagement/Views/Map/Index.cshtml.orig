@@ -13,8 +13,11 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/jquery.datetimepicker.min.css")
+<<<<<<< HEAD
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet" />
-
+=======
+    @Styles.Render("~/Content/font-awesome.css")
+>>>>>>> ab33b9edf1e19ffc71f1a1ac694e3cbff51d6e00
     <style>
         html, body {
             height: 100%;
