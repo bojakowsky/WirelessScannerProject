@@ -2,37 +2,45 @@
     ViewBag.Title = "Home Page";
 }
 
-
 <div class="row">
     <div class="col-md-6 home-item animated fadeInLeft">
-        <div class="inside">
-            <i class="material-icons">map</i>
-            <h1>Map</h1>
-            <p>Show all collected wireless networks on the map.<br />Here are filters that make it easier to find the relevant data.</p>
-        </div>
+        <a href="/Map">
+            <div class="inside">
+                <i class="material-icons">map</i>
+                <h1>Map</h1>
+                <p>Show all collected wireless networks on the map.<br />Here are filters that make it easier to find the relevant data.</p>
+            </div>
+        </a>
     </div>
 
     <div class="col-md-6 home-item animated fadeInLeft">
-        <div class="inside">
-            <i class="material-icons">format_list_bulleted</i>
-            <h1>List</h1>
-            <p>Display results as list.<br />Easier way to analyze data.</p>
-        </div>
+        <a href="/Device">
+            <div class="inside">
+                <i class="material-icons">devices</i>
+                <h1>Devices</h1>
+                <p>Display devices info.<br />Analyze captured data.</p>
+            </div>
+            </a>
     </div>
 
     <div class="col-md-6 home-item animated fadeInLeft">
-        <div class="inside">
-            <i class="material-icons">edit_location</i>
-            <h1>Edit data</h1>
-            <p>Edit records of collected data.<br />Here you can remove or change results.</p>
-        </div>
+        <a href="/Wifi">
+            <div class="inside">
+                <i class="material-icons">wifi</i>
+                <h1>WIFI</h1>
+                <p>Display wifi results as list.<br />Easier way to analyze data.</p>
+            </div>
+            </a>
     </div>
 
     <div class="col-md-6 home-item animated fadeInLeft">
-        <div class="inside">
-            <i class="material-icons">people</i>
-            <h1>Panel access</h1>
-            <p>Edit users.<br />Add new user which can display collected data.</p>
-        </div>
+        <a href="/Bluetooth">
+            <div class="inside">
+                <i class="material-icons">bluetooth</i>
+                <h1>Bluetooth</h1>
+                <p>Display bluetooth results as list.<br />Easier way to analyze data.</p>
+            </div>
+            </a>
     </div>
+    
 </div>
