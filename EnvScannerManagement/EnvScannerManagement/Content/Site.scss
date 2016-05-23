@@ -186,19 +186,34 @@ input, button{
 }
 
 a{
+    color:$red;
+}
+
+.fixed-menu-bar a{
+    color:white;
+    text-decoration:none;
+}
+
+.home-item{
+    a{
     color:inherit !important;
     &:hover, &:focus{
         text-decoration:none  !important;
     }
+}
+}
+
+.login-page{
+    padding-top:200px;
 }
 
 
 $background: #3d566e;
 $color: #ecf0f1;
 
-$height-icon: 20px;
-$width-line: 40px;
-$height-line: 3px;
+$height-icon: 15px;
+$width-line: 30px;
+$height-line: 2px;
 
 $transition-time: 0.4s;
 $rotation: 45deg;
@@ -360,10 +375,10 @@ $translateX: 0;
         .fixed-menu-bar {
             position: fixed;
             z-index: 8;
-            left: 50px;
+            left: 10px;
             top: 50px;
-            height: 100px;
-            width: 300px;
+            height: 75px;
+            width: 200px;
             background:#DE473C;
         }
 
@@ -376,7 +391,8 @@ $translateX: 0;
                 text-align: center;
                 display: block;
                     color: white;
-                    height:100px;
+                    height:75px;
+
             }
 
             .fixed-menu-bar .centered-icon:hover i {
@@ -398,10 +414,10 @@ $translateX: 0;
 
 
             .fixed-menu-bar .centered-icon i {
-                -webkit-transition: ease-in-out .3s all;
-                transition: ease-in-out .3s all;
-                 font-size: 40px !important;
-    line-height: 100px !important;
+                   -webkit-transition: ease-in-out .3s all;
+    transition: ease-in-out .3s all;
+    font-size: 26px !important;
+    line-height: 75px;
             }
 
                 .fixed-menu-bar .left:hover .fa-bars {

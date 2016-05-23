@@ -122,21 +122,31 @@ input, button {
       transition: all ease-in-out 0.3s; }
 
 a {
+  color: #DE473C; }
+
+.fixed-menu-bar a {
+  color: white;
+  text-decoration: none; }
+
+.home-item a {
   color: inherit !important; }
-  a:hover, a:focus {
+  .home-item a:hover, .home-item a:focus {
     text-decoration: none  !important; }
 
+.login-page {
+  padding-top: 200px; }
+
 #hamburger-icon {
-  width: 40px;
-  height: 20px;
+  width: 30px;
+  height: 15px;
   position: relative;
   display: block;
-  margin: 40px auto 20px auto; }
+  margin: 30px auto 15px auto; }
   #hamburger-icon .line {
     display: block;
     background: #ecf0f1;
-    width: 40px;
-    height: 3px;
+    width: 30px;
+    height: 2px;
     position: absolute;
     left: 0;
     border-radius: 0;
@@ -150,23 +160,23 @@ a {
     #hamburger-icon .line.line-3 {
       top: 100%; }
   #hamburger-icon:hover .line-1, #hamburger-icon:focus .line-1 {
-    transform: translateY(-1.5px);
-    -webkit-transform: translateY(-1.5px);
-    -moz-transform: translateY(-1.5px); }
+    transform: translateY(-1px);
+    -webkit-transform: translateY(-1px);
+    -moz-transform: translateY(-1px); }
   #hamburger-icon:hover .line-3, #hamburger-icon:focus .line-3 {
-    transform: translateY(1.5px);
-    -webkit-transform: translateY(1.5px);
-    -moz-transform: translateY(1.5px); }
+    transform: translateY(1px);
+    -webkit-transform: translateY(1px);
+    -moz-transform: translateY(1px); }
   #hamburger-icon.active .line-1 {
-    transform: translateY(10px) translateX(0) rotate(45deg);
-    -webkit-transform: translateY(10px) translateX(0) rotate(45deg);
-    -moz-transform: translateY(10px) translateX(0) rotate(45deg); }
+    transform: translateY(7.5px) translateX(0) rotate(45deg);
+    -webkit-transform: translateY(7.5px) translateX(0) rotate(45deg);
+    -moz-transform: translateY(7.5px) translateX(0) rotate(45deg); }
   #hamburger-icon.active .line-2 {
     opacity: 0; }
   #hamburger-icon.active .line-3 {
-    transform: translateY(-10px) translateX(0) rotate(-45deg);
-    -webkit-transform: translateY(-10px) translateX(0) rotate(-45deg);
-    -moz-transform: translateY(-10px) translateX(0) rotate(-45deg); }
+    transform: translateY(-7.5px) translateX(0) rotate(-45deg);
+    -webkit-transform: translateY(-7.5px) translateX(0) rotate(-45deg);
+    -moz-transform: translateY(-7.5px) translateX(0) rotate(-45deg); }
 
 html, body {
   height: 100%;
@@ -250,10 +260,10 @@ html, body {
 .fixed-menu-bar {
   position: fixed;
   z-index: 8;
-  left: 50px;
+  left: 10px;
   top: 50px;
-  height: 100px;
-  width: 300px;
+  height: 75px;
+  width: 200px;
   background: #DE473C; }
 
 .fixed-menu-bar .no-padding {
@@ -264,7 +274,7 @@ html, body {
   text-align: center;
   display: block;
   color: white;
-  height: 100px; }
+  height: 75px; }
 
 .fixed-menu-bar .centered-icon:hover i {
   -webkit-transition: ease-in-out .3s all;
@@ -280,8 +290,8 @@ html, body {
 .fixed-menu-bar .centered-icon i {
   -webkit-transition: ease-in-out .3s all;
   transition: ease-in-out .3s all;
-  font-size: 40px !important;
-  line-height: 100px !important; }
+  font-size: 26px !important;
+  line-height: 75px; }
 
 .fixed-menu-bar .left:hover .fa-bars {
   opacity: 0.8;
