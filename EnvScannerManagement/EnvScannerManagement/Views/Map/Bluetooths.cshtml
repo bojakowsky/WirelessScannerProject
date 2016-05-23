@@ -1,0 +1,307 @@
+﻿@model IEnumerable<Database.Bluetooth>
+@using Newtonsoft.Json
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bluetooths Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+
+    <link href="@Url.Content("~/Content/animate.css")" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/jquery.datetimepicker.min.css")
+</head>
+<body>
+    <div class="fixed-menu-bar animated fadeInLeft">
+        <div class="col-xs-4 no-padding centered-icon back">
+            <a href="/"><i class="material-icons">arrow_back</i></a>
+        </div>
+        <div class="col-xs-4 no-padding" style="overflow:hidden;">
+            <a href="/"><img style="height: 100px;" class="logo" src="~/images/logo.svg" /></a>
+        </div>
+        <div class="col-xs-4 centered-icon no-padding" id="showMenu" style="background:#333;">
+            <a id="hamburger-icon" href="#" title="Menu">
+                <span class="line line-1"></span>
+                <span class="line line-2"></span>
+                <span class="line line-3"></span>
+            </a>
+        </div>
+    </div>
+    <div class="fixed-menu">
+        <div class="row">
+            <div class="col-xs-12">
+                <i id="closeMenu" class="close-menu glyphicon glyphicon-remove close-menu-on-map"></i>
+            </div>
+        </div>
+
+        <div class="row filters" style="margin-top:30px;">
+            <div class="col-xs-12">
+                <h3>Maps</h3>
+            </div>
+            <div class="col-xs-12">
+                <button class="btn btn-primary m-t-xs" onclick="showAllConnections();"><i class="material-icons">wifi_tethering</i> Device</button>
+                <button class="btn btn-primary m-t-xs" onclick="showWifisMap();"><i class="material-icons">wifi_tethering</i> Wifi</button>
+            </div>
+        </div>
+
+        <div class="row filters" style="margin-top:30px;">
+            <div class="col-xs-12">
+                <h3>Markers</h3>
+            </div>
+            <div class="col-xs-12">
+                <button class="btn btn-default m-t-xs" onclick="clearMarkers();"><i class="material-icons">visibility_off</i> Hide</button>
+                <button class="btn btn-default m-t-xs" onclick="showMarkers();"><i class="material-icons">visibility</i> All</button>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:30px;">
+            <div class="col-xs-12">
+                <h3>Date & time</h3>
+            </div>
+            <div class="col-xs-12">
+                <input type="text" class="form-control" name="filter-date" id="filter-date-from" placeholder="From" />
+                <input style="margin-top:5px;" type="text" class="form-control" name="filter-date" id="filter-date-to" placeholder="To" />
+            </div>
+            <div class="col-xs-12" style="margin-top:5px;">
+                <button class="btn btn-primary pull-right" onclick="filterDateAndTime()"><i class="fa fa-filter"></i> Filter</button>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:30px;">
+            <div class="col-xs-12">
+                <h3>Device</h3>
+            </div>
+            <div class="col-xs-12">
+                <input type="text" class="form-control" placeholder="Device ID" id="deviceId" />
+            </div>
+            <div class="col-xs-12" style="margin-top:5px;">
+                <button class="btn btn-primary pull-right" onclick="filterByDeviceId()"><i class="fa fa-search"></i> Search</button>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:30px;">
+            <div class="col-xs-12">
+                <h3>Bluetooth device MAC</h3>
+            </div>
+            <div class="col-xs-12">
+                <input type="text" class="form-control" placeholder="MAC" id="bluetoothMAC" />
+            </div>
+            <div class="col-xs-12" style="margin-top:5px;">
+                <button class="btn btn-primary pull-right" onclick="filterByBluetoothMAC()"><i class="fa fa-search"></i> Search</button>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:30px;">
+            <div class="col-xs-12">
+                <h3>Bluetooth device name</h3>
+            </div>
+            <div class="col-xs-12">
+                <input type="text" class="form-control" placeholder="Name" id="bluetoothName" />
+            </div>
+            <div class="col-xs-12" style="margin-top:5px;">
+                <button class="btn btn-primary pull-right" onclick="filterByBluetoothName()"><i class="fa fa-search"></i> Search</button>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:30px;">
+            <div class="col-xs-12">
+                <h3>Go to</h3>
+            </div>
+            <div class="col-xs-12">
+                <input type="text" class="form-control" id="lat" placeholder="Lat" />
+                <input style="margin-top:5px;" class="form-control" type="text" id="lang" placeholder="Lang" />
+            </div>
+            <div class="col-xs-12" style="margin-top:5px;">
+                <button class="btn btn-primary pull-right" onclick="goToLatLang()"><i class="fa fa-compass"></i> Go</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="map"></div>
+
+    <script>
+        //Google Maps API map, markers, infoWindows initialization
+        var data;
+        var map;
+        var gm;
+        var markers;
+        data = @Html.Raw(JsonConvert.SerializeObject(this.Model, new JsonSerializerSettings {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        }));
+
+        function initMap() {
+            window.onload = function() {
+                gm = google.maps;
+                var latlng = new google.maps.LatLng(data[0].General.GPSlatitude, data[0].General.GPSLongtitude);
+                var mapOptions = {
+                    zoom: 10,
+                    center: latlng,
+                    mapTypeId: google.maps.MapTypeId.SATELLITE,
+                    scaleControl: true,
+                    markersWontMove: true, 
+                    markersWontHide: true
+                };
+
+                map = new gm.Map(document.getElementById("map"), mapOptions);
+
+                markers = new OverlappingMarkerSpiderfier(map);
+
+                var bounds = new gm.LatLngBounds();
+                for (var i = 0; i < data.length; i++) {
+                    var iconToBeSet = '../Content/MapIcons/marker-bt.png';
+                    marker = new gm.Marker({
+                        map: map,
+                        position: new gm.LatLng(data[i].General.GPSlatitude, data[i].General.GPSLongtitude),
+                        icon: iconToBeSet,
+                        i: i
+                    });
+                    markers.addMarker(marker);
+                }
+
+                markers.addListener('click', function(marker) {
+                    if (typeof infowindow !== 'undefined') infowindow.close()
+                    infowindow = new gm.InfoWindow();
+                    var content = "<div class='row marker-info m-t-md'><div class='col-xs-12 column'><strong>Bluetooth data <hr/></strong><div/>";
+
+                    var i = marker.i;
+                    content = content
+                    +"<div class='row marker-info'><div class='col-xs-12 column'><strong><i class='material-icons'>devices</i> Device Id: </strong>" + data[i].General.DeviceId + "<div/>"
+                    +"<div class='row marker-info m-t-xs'><div class='col-xs-12 column'><strong><i class='material-icons'>explore</i> Latitude: </strong>" + data[i].General.GPSlatitude +
+                    "<br /><strong style='margin-left: 23.5px;'>Longtitude: </strong>"+data[i].General.GPSLongtitude +"<div/>"
+                    +"<div class='row marker-info'><div class='col-xs-12 column'><strong><i class='material-icons'>date_range</i> Date and time: </strong>" + getNiceLookingDate(new Date(data[i].General.DateAndTime))+ "<div/>"
+
+                    +"<div class='row marker-info m-t-sm'><div class='col-xs-12 column'><strong><i class='material-icons'>storage</i> Bluetooth name: </strong>" + data[i].DeviceName + "<div/>"
+                    +"<div class='row marker-info m-t-xs'><div class='col-xs-12 column'><strong><i class='material-icons'>wifi_tethering</i> Bluetooth MAC: </strong>" + data[i].MAC + "<div/>"
+
+                    infowindow.setContent(content);
+                    infowindow.open(map, marker);
+
+                });
+                //map.fitBounds(bounds);
+            }
+        }
+
+        //Panels
+        function filterDateAndTime(){
+            dateFrom = new Date($("#filter-date-from").val())
+            dateTo = new Date($("#filter-date-to").val())
+            for (var i = 0; i < markers.getMarkers().length; i++) {
+                d = new Date(data[i].General.DateAndTime)
+                d = new Date(d .valueOf() + d.getTimezoneOffset() * 60000);
+                if ((d - dateFrom >= 0) && (d - dateTo <= 0))
+                    markers.getMarkers()[i].setMap(map);
+                else markers.getMarkers()[i].setMap(null);
+            }
+        }
+
+        function filterByDeviceId(){
+            devId = $("#deviceId").val()
+            for (var i = 0; i < markers.getMarkers().length; i++) {
+                if (devId == data[i].General.DeviceId)
+                    markers.getMarkers()[i].setMap(map);
+                else markers.getMarkers()[i].setMap(null);
+            }
+        }
+
+        function filterByBluetoothMAC(){
+            devId = $("#bluetoothMAC").val()
+            for (var i = 0; i < markers.getMarkers().length; i++) {
+                if (devId == data[i].MAC)
+                    markers.getMarkers()[i].setMap(map);
+                else markers.getMarkers()[i].setMap(null);
+            }
+        }
+
+        function filterByBluetoothName(){
+            devId = $("#bluetoothName").val()
+            for (var i = 0; i < markers.getMarkers().length; i++) {
+                if (devId == data[i].DeviceName)
+                    markers.getMarkers()[i].setMap(map);
+                else markers.getMarkers()[i].setMap(null);
+            }
+        }
+
+        function goToLatLang(){
+            lat = $("#lat").val()
+            lang = $("#lang").val()
+
+            if (!isNaN(lat) && !isNaN(lang))
+                map.setCenter(new google.maps.LatLng(lat, lang))
+        }
+
+        // Sets the map on all markers in the array.
+        function setMapOnAll(map) {
+            for (var i = 0; i < markers.getMarkers().length; i++) {
+                markers.getMarkers()[i].setMap(map);
+            }
+        }
+
+        function clearMarkers(){
+            setMapOnAll(null);
+        }
+
+        function showMarkers(){
+            setMapOnAll(map);
+        }
+
+
+        function showAllConnections(){
+            var url = '@Url.Action("Index", "Map")';
+            location.href = url;
+        }
+
+        function showWifisMap(){
+            var url = '@Url.Action("Wifis", "Map")';
+            location.href = url;
+        }
+
+        function padLeft(nr, n, str){
+            return Array(n-String(nr).length+1).join(str||'0')+nr;
+        }
+
+        function getNiceLookingDate(dateVal){
+            return dateVal.toUTCString();
+        }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4f8WgskI1t9Np7UVijjIQY4LF54yObA4&callback=initMap"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Content/jquery.datetimepicker.full.js")
+    <script>
+        jQuery(document).ready(function () {
+            'use strict';
+
+            jQuery('#filter-date-from, #filter-date-to, #search-from-date, #search-to-date').datetimepicker();
+            $("#showMenu").click(function(){
+                if($(".fixed-menu").hasClass('menu-expanded')){
+                    $("#hamburger-icon").toggleClass('active');
+                    $(".fixed-menu").css('right','-300px');
+                    $(".fixed-menu").removeClass('menu-expanded');
+                } else {
+                    $("#hamburger-icon").toggleClass('active');
+                    $(".fixed-menu").css('right','0px');
+                    $(".fixed-menu").toggleClass('menu-expanded');
+                }
+            })
+            $("#closeMenu").click(function(){
+                if($(".fixed-menu").hasClass('menu-expanded')){
+                    $("#hamburger-icon").toggleClass('active');
+                    $(".fixed-menu").css('right','-300px');
+                    $(".fixed-menu").removeClass('menu-expanded');
+                } else {
+                    $(".fixed-menu").css('right','0px');
+                    $(".fixed-menu").toggleClass('menu-expanded')
+                    $("#hamburger-icon").toggleClass('active');;
+                }
+            })
+        });
+    </script>
+    @Scripts.Render("~/Content/oms.min.js")
+</body>
+</html>
