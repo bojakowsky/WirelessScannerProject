@@ -27,4 +27,16 @@ namespace Database
         //Bluetooth
         public virtual ICollection<Bluetooth> Bluetooths { get; set; }
     }
+
+    public class DTOGeneral
+    {
+        //General data
+        public string AndroidAPI { get; set; }
+        public int NumberOfWifiConnections { get; set; }
+        public int NumberOfBtConnections { get; set; }
+        public double GPSlatitude { get; set; }
+        public double GPSLongtitude { get; set; }
+        public DateTime DateAndTime { get; set; }
+        public string DeviceId { get; set; }
+    }
 }

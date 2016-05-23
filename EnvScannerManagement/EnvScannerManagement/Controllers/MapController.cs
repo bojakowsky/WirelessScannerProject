@@ -21,22 +21,30 @@ namespace EnvScannerManagement.Controllers
         {
             db.Configuration.ProxyCreationEnabled = false;
             var generals = db.Generals;
-            return View(await generals.AsNoTracking().OrderByDescending(x => x.DateAndTime).ToListAsync());
+            return View(await generals.AsNoTracking().ToListAsync());
         }
 
-        public async Task<ActionResult> Hotspots()
+        public async Task<ActionResult> Bluetooths()
         {
             db.Configuration.ProxyCreationEnabled = false;
-            //var generalsIds = db.Wifis.Where(x => x.Security.Equals("[ESS]")).Select(y => y.GeneralId);
-            //var generals = db.Generals.Where(x => generalsIds.Contains(x.Id));
-            var openWifis = db.Wifis.Include(w => w.General).Where(x => x.Security.Equals("[ESS]")).AsQueryable();
-            return View(await openWifis.AsNoTracking().OrderByDescending(x => x.General.DateAndTime).ToListAsync());
+            var bluetooths = db.Bluetooths.Include(w => w.General).AsQueryable();
+            return View(await bluetooths.AsNoTracking().ToListAsync());
+        }
+
+        public async Task<ActionResult> Wifis()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            //var openWifis = db.Wifis.Include(w => w.General).Where(x => x.Security.Equals("[ESS]")).AsQueryable();
+            var wifis = db.Wifis.Include(w => w.General).AsQueryable();
+            //return View(await openWifis.AsNoTracking().OrderByDescending(x => x.General.DateAndTime).ToListAsync());
+            return View(await wifis.AsNoTracking().ToListAsync());
         }
 
         struct WifiAndBluetoothMerged
         {
             public List<DTOBluetooth> bt;
             public List<DTOWifi> wifi;
+            public List<DTOGeneral> general;
         }
 
         public async Task<ActionResult> GetDetails(int generalId)
@@ -57,10 +65,22 @@ namespace EnvScannerManagement.Controllers
                 MAC = x.MAC
             }).ToListAsync();
 
+            var generalDetails = await db.Generals.AsNoTracking().Where(y => y.Id == generalId).Select(x => new DTOGeneral()
+            {
+                AndroidAPI = x.AndroidAPI,
+                DateAndTime = x.DateAndTime,
+                DeviceId = x.DeviceId,
+                GPSlatitude = x.GPSlatitude,
+                GPSLongtitude = x.GPSLongtitude,
+                NumberOfBtConnections = x.NumberOfBtConnections,
+                NumberOfWifiConnections = x.NumberOfWifiConnections
+            }).ToListAsync();
+
             var merged = new WifiAndBluetoothMerged()
             {
                 bt = bluetoothDetails,
-                wifi = wifiDetails
+                wifi = wifiDetails,
+                general = generalDetails
             };
             
             return Json(merged, JsonRequestBehavior.AllowGet);

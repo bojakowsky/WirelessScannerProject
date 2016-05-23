@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple Map</title>
+    <title>Device Map</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
 
@@ -21,9 +21,9 @@
     <div class="fixed-menu-bar animated fadeInLeft">
         <div class="col-xs-4 no-padding centered-icon back">
             <a href="/"><i class="material-icons">arrow_back</i></a>
-</div>
+        </div>
         <div class="col-xs-4 no-padding" style="overflow:hidden;">
-            <a href="/"><img style="    height: 100px;" class="logo" src="~/images/logo.svg" /></a>
+            <a href="/"><img style="height: 100px;" class="logo" src="~/images/logo.svg" /></a>
         </div>
         <div class="col-xs-4 centered-icon no-padding" id="showMenu" style="background:#333;">
             <a id="hamburger-icon" href="#" title="Menu">
@@ -36,9 +36,20 @@
     <div class="fixed-menu">
         <div class="row">
             <div class="col-xs-12">
-                <i id="closeMenu" class=" close-menu glyphicon glyphicon-remove close-menu-on-map"></i>
+                <i id="closeMenu" class="close-menu glyphicon glyphicon-remove close-menu-on-map"></i>
             </div>
         </div>
+
+        <div class="row filters" style="margin-top:30px;">
+            <div class="col-xs-12">
+                <h3>Maps</h3>
+            </div>
+            <div class="col-xs-12">
+                <button class="btn btn-primary m-t-xs" onclick="showWifisMap();"><i class="material-icons">wifi_tethering</i> Wifi</button>
+                <button class="btn btn-primary m-t-xs" onclick="showBluetoothsMap();"><i class="material-icons">bluetooth</i> Bluetooth</button>
+            </div>
+        </div>
+
         <div class="row filters" style="margin-top:30px;">
             <div class="col-xs-12">
                 <h3>Markers</h3>
@@ -50,8 +61,7 @@
             </div>
             <div class="col-xs-12">
                 <button class="btn btn-primary m-t-xs" onclick="showWifis();"><i class="material-icons">wifi</i> WiFi</button>
-                <button class="btn btn-primary m-t-xs" onclick="showBluetooths();"><i class="material-icons">bluetooth</i> Bluetooth</button>
-                <button class="btn btn-primary m-t-xs" onclick="showBluetooths();"><i class="material-icons">wifi_tethering</i> Hotspots</button>
+                <button class="btn btn-primary m-t-xs" onclick="showBluetooths();"><i class="material-icons">bluetooth</i> Bluetooth</button>                
             </div>
         </div>
 
@@ -116,47 +126,49 @@
         function showMore(data){
             if (data.NumberOfWifiConnections > 0 || data.NumberOfBtConnections > 0)
                 $.ajax({
-                type: 'GET',
+                    type: 'GET',
                     url: 'Map/GetDetails',
                     contentType: 'json',
                     data: { generalId: data.Id },
                     success: function(response, textStatus, jqXHR){
-                    addResponseToContent(response)
+                        addResponseToContent(response)
                     },
                     error: function(jqXHR, textStatus, errorThrown){
-                    // error occured, no need to be handled
-                    console.log("Something went wrong with getting details.")
+                        // error occured, no need to be handled
+                        console.log("Something went wrong with getting details.")
                     }
-            });
+                });
         }
 
         function addResponseToContent(response){
-            content = ""
+            content = setDefaultContent(response.general[0])
             if (response.wifi.length > 0){
-                content += "<div class='row marker-info m-t-md'><div class='col-xs-12 column'><strong>WIFIs </strong><div/>"
+                content += "<div class='row marker-info m-t-md'><div class='col-xs-12 column'><strong><hr/> WIFIs <hr/></strong><div/>"
                 for (var j = 0 ; j < response.wifi.length; j++)
                 {
-                    content = content + 
+                    content = content +
                         "<div class='row marker-info m-t-sm'><div class='col-xs-12 column'><strong><i class='material-icons'>storage</i> BSSID: </strong>" + response.wifi[j].BSSID + "<div/>"
                         +"<div class='row marker-info m-t-xs'><div class='col-xs-12 column'><strong><i class='material-icons'>wifi_tethering</i> SSID: </strong>" + response.wifi[j].SSID + "<div/>"
                         +"<div class='row marker-info m-t-xs'><div class='col-xs-12 column'><strong><i class='material-icons'>wifi_lock</i> Security: </strong>" + response.wifi[j].Security + "<div/>"
                         +"<div class='row marker-info m-t-xs'><div class='col-xs-12 column'><strong><i class='material-icons'>graphic_eq</i> Frequency: </strong>" + response.wifi[j].Frequency + "<div/>"
                         +"<div class='row marker-info m-t-xs'><div class='col-xs-12 column'><strong><i class='material-icons'>signal_cellular_4_bar</i> Level: </strong>" + response.wifi[j].Level + "<div/>"
                         +"<div class='row marker-info m-t-xs'><div class='col-xs-12 column'><strong><i class='material-icons'>today</i> Timestamp: </strong>" + response.wifi[j].Timestamp + "<div/>"
+                        +"<hr/>"
                 }
             }
 
 
             if (response.bt.length > 0){
-                content += "<div class='row marker-info m-t-md'><div class='col-xs-12 column'><strong>Bluetooths </strong><div/>"
+                content += "<div class='row marker-info m-t-md'><div class='col-xs-12 column'><strong>Bluetooths <hr/></strong><div/>"
                 for (var j = 0 ; j < response.bt.length; j++)
                 {
                     content = content +
                         "<div class='row marker-info m-t-sm'><div class='col-xs-12 column'><strong><i class='material-icons'>storage</i> BSSID: </strong>" + response.bt[j].DeviceName + "<div/>"
                         +"<div class='row marker-info m-t-xs'><div class='col-xs-12 column'><strong><i class='material-icons'>wifi_tethering</i> SSID: </strong>" + response.bt[j].MAC + "<div/>"
+                        +"<hr/>"
                 }
             }
-            infowindow.setContent(infowindow.content + content)
+            infowindow.setContent(content)
         }
 
         function initMap() {
@@ -193,13 +205,9 @@
                         if (typeof infowindow !== 'undefined') infowindow.close()
                         infowindow = new google.maps.InfoWindow();
                         var content =
-                            "<div class='row marker-info'><div class='col-xs-12 column'><strong><i class='material-icons'>devices</i> Device Id: </strong>" + data[i].DeviceId + "<div/>"
-                            +"<div class='row marker-info m-t-xs'><div class='col-xs-12 column'><strong><i class='material-icons'>explore</i> Latitude: </strong>" + data[i].GPSlatitude + 
-                            "<br /><strong style='margin-left: 23.5px;'>Longtitude: </strong>"+data[i].GPSlatitude +"<div/>"
-                            +"<div class='row marker-info'><div class='col-xs-12 column'><strong><i class='material-icons'>date_range</i> Date and time: </strong>" + new Date(data[i].DateAndTime)+ "<div/>"
-                            +"<div class='column col-xs-6 m-t-sm'><strong><i class='material-icons'>wifi</i> " + data[i].NumberOfWifiConnections +"</strong></div>"
-                             +"<div class='column col-xs-6 m-t-sm'><strong><i class='material-icons'>bluetooth</i> " + data[i].NumberOfBtConnections +"</strong></div>"
+                            setDefaultContent(data[i])
                             +"<div class='column col-xs-12 m-t-sm'><a href='#' onclick='return showMore(data["+i+"]);'><button class='btn btn-primary btn-xs'><i class='material-icons'>more_horiz</i>Show more</button></a></div></div>"
+
 
                         infowindow.setContent(content);
                         infowindow.open(map, marker);
@@ -209,6 +217,32 @@
                 })(i, marker);
 
             }
+        }
+        function padLeft(nr, n, str){
+            return Array(n-String(nr).length+1).join(str||'0')+nr;
+        }
+
+        function getNiceLookingDate(dateVal){
+            return dateVal.toUTCString();
+        }
+
+        function setDefaultContent(d){
+            if (d.DateAndTime.substr(0,5) == '/Date'){
+                var dateValue = parseInt(d.DateAndTime.replace(/\/Date\((\d+)\)\//g, "$1"));
+                dateValue = new Date(dateValue);
+                d.DateAndTime = getNiceLookingDate(dateValue);
+            }
+            else {
+                d.DateAndTime = new Date(d.DateAndTime);
+                d.DateAndTime = getNiceLookingDate(d.DateAndTime);
+            }
+
+            return "<div class='row marker-info'><div class='col-xs-12 column'><strong><i class='material-icons'>devices</i> Device Id: </strong>" + d.DeviceId + "<div/>"
+            +"<div class='row marker-info m-t-xs'><div class='col-xs-12 column'><strong><i class='material-icons'>explore</i> Latitude: </strong>" + d.GPSlatitude +
+            "<br /><strong style='margin-left: 23.5px;'>Longtitude: </strong>"+d.GPSLongtitude +"<div/>"
+            +"<div class='row marker-info'><div class='col-xs-12 column'><strong><i class='material-icons'>date_range</i> Date and time: </strong>" + d.DateAndTime + "<div/>"
+            +"<div class='column col-xs-6 m-t-sm'><strong><i class='material-icons'>wifi</i> " + d.NumberOfWifiConnections +"</strong></div>"
+                +"<div class='column col-xs-6 m-t-sm'><strong><i class='material-icons'>bluetooth</i> " + d.NumberOfBtConnections +"</strong></div>";
         }
 
         // Sets the map on all markers in the array.
@@ -242,6 +276,16 @@
             }
         }
 
+        function showWifisMap(){
+            var url = '@Url.Action("Wifis", "Map")';
+            location.href = url;
+        }
+
+        function showBluetoothsMap(){
+            var url = '@Url.Action("Bluetooths", "Map")';
+            location.href = url;
+        }
+
         //Panels
         function togglePanelVisibility()
         {
@@ -261,11 +305,12 @@
         }
 
         function filterDateAndTime(){
-            dateFrom = new Date($("#filter-date-from").val())
+            dateFrom = new Date($("#filter-date-from" ).val())
             dateTo = new Date($("#filter-date-to").val())
             for (var i = 0; i < markers.length; i++) {
                 d = new Date(data[i].DateAndTime)
-                if (d >= dateFrom && d <= dateTo)
+                d = new Date(d .valueOf() + d.getTimezoneOffset() * 60000);
+                if ((d - dateFrom >= 0) && (d - dateTo <= 0))
                     markers[i].setMap(map);
                 else markers[i].setMap(null);
             }

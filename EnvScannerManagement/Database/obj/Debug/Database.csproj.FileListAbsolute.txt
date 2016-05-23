@@ -1,12 +1,3 @@
-C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Debug\Database.dll.config
-C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Debug\Database.dll
-C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Debug\Database.pdb
-C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Debug\EntityFramework.dll
-C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Debug\EntityFramework.xml
-C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\obj\Debug\Database.dll
-C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\obj\Debug\Database.pdb
 C:\Users\BRZYDAL\Desktop\WirelessScannerProject-master\EnvScannerManagement\Database\bin\Debug\Database.dll.config
 C:\Users\BRZYDAL\Desktop\WirelessScannerProject-master\EnvScannerManagement\Database\bin\Debug\Database.dll
 C:\Users\BRZYDAL\Desktop\WirelessScannerProject-master\EnvScannerManagement\Database\bin\Debug\Database.pdb
@@ -17,7 +8,6 @@ C:\Users\BRZYDAL\Desktop\WirelessScannerProject-master\EnvScannerManagement\Data
 C:\Users\BRZYDAL\Desktop\WirelessScannerProject-master\EnvScannerManagement\Database\obj\Debug\Database.dll
 C:\Users\BRZYDAL\Desktop\WirelessScannerProject-master\EnvScannerManagement\Database\obj\Debug\Database.pdb
 C:\Users\BRZYDAL\Desktop\WirelessScannerProject-master\EnvScannerManagement\Database\obj\Debug\Database.csprojResolveAssemblyReference.cache
-C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\obj\Debug\Database.csprojResolveAssemblyReference.cache
 D:\!!!Workspace\Wireles_Scanner\latest\WirelessScannerProject\EnvScannerManagement\Database\bin\Debug\Database.dll.config
 D:\!!!Workspace\Wireles_Scanner\latest\WirelessScannerProject\EnvScannerManagement\Database\bin\Debug\Database.dll
 D:\!!!Workspace\Wireles_Scanner\latest\WirelessScannerProject\EnvScannerManagement\Database\bin\Debug\Database.pdb
@@ -28,3 +18,13 @@ D:\!!!Workspace\Wireles_Scanner\latest\WirelessScannerProject\EnvScannerManageme
 D:\!!!Workspace\Wireles_Scanner\latest\WirelessScannerProject\EnvScannerManagement\Database\obj\Debug\Database.csprojResolveAssemblyReference.cache
 D:\!!!Workspace\Wireles_Scanner\latest\WirelessScannerProject\EnvScannerManagement\Database\obj\Debug\Database.dll
 D:\!!!Workspace\Wireles_Scanner\latest\WirelessScannerProject\EnvScannerManagement\Database\obj\Debug\Database.pdb
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Debug\Database.dll.config
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Debug\Database.dll
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Debug\Database.pdb
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Debug\EntityFramework.dll
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Debug\EntityFramework.xml
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\obj\Debug\Database.csprojResolveAssemblyReference.cache
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\obj\Debug\Database.dll
+C:\Users\BRZYDAL\Desktop\TEMP\WirelessScannerProject\EnvScannerManagement\Database\obj\Debug\Database.pdb

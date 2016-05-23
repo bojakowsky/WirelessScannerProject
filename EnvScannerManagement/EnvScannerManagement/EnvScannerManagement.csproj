@@ -256,12 +256,16 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\jquery.datetimepicker.full.js" />
+    <Content Include="Content\MapIcons\marker-bt.png" />
+    <Content Include="Content\MapIcons\marker-empty.png" />
+    <Content Include="Content\MapIcons\marker-wifi.png" />
+    <Content Include="Content\MapIcons\marker-wifibt.png" />
+    <Content Include="Content\oms.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Models\jquery.datetimepicker.full.js" />
     <Content Include="Content\jquery.datetimepicker.min.css" />
     <Content Include="Content\MapIcons\blue_MarkerA.png" />
     <Content Include="Content\MapIcons\blue_MarkerB.png" />
@@ -639,8 +643,9 @@
     <Content Include="Views\Device\Delete.cshtml" />
     <Content Include="Views\Device\Index.cshtml" />
     <Content Include="Views\Account\UsersManagement.cshtml" />
+    <Content Include="Views\Map\Wifis.cshtml" />
     <Content Include="Views\Wifi\OpenWifis.cshtml" />
-    <Content Include="Views\Map\Hotspots.cshtml" />
+    <Content Include="Views\Map\Bluetooths.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
