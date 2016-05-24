@@ -22,3 +22,4 @@ Of course you can also run this site on your local machine. Just fork it and run
 ## Mobile App
 Minimum Android API to run wireless scanner is 21. 
 There is no authorization - as you run it on your phone you can start collecting data. By default data is sent to our azure web app. You will easily locate the address in android code. Type your server address and you're ready to go. Data will be sent every 12 seconds - after GPS will find you. Of course - feel free to change the configuration.
+![alt tag](https://github.com/bojakowsky/WirelessScannerProject/blob/master/1a.png)
