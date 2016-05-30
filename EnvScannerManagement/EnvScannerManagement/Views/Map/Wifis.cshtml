@@ -70,7 +70,7 @@
                 <input style="margin-top:5px;" type="text" class="form-control" name="filter-date" id="filter-date-to" placeholder="To" />
             </div>
             <div class="col-xs-12" style="margin-top:5px;">
-                <button class="btn btn-primary pull-right" onclick="filterDateAndTime()"><i class="fa fa-filter"></i> Filter</button>
+                <button class="btn btn-primary pull-right" onclick="filterDateAndTime()"><i class="material-icons">filter_list</i> Filter</button>
             </div>
         </div>
 
@@ -82,7 +82,7 @@
                 <input type="text" class="form-control" placeholder="Device ID" id="deviceId" />
             </div>
             <div class="col-xs-12" style="margin-top:5px;">
-                <button class="btn btn-primary pull-right" onclick="filterByDeviceId()"><i class="fa fa-search"></i> Search</button>
+                <button class="btn btn-primary pull-right" onclick="filterByDeviceId()"><i class="material-icons">search</i> Search</button>
             </div>
         </div>
 
@@ -94,7 +94,7 @@
                 <input type="text" class="form-control" placeholder="BSSID" id="wifiBSSID" />
             </div>
             <div class="col-xs-12" style="margin-top:5px;">
-                <button class="btn btn-primary pull-right" onclick="filterByWifiBSSID()"><i class="fa fa-search"></i> Search</button>
+                <button class="btn btn-primary pull-right" onclick="filterByWifiBSSID()"><i class="material-icons">search</i> Search</button>
             </div>
         </div>
 
@@ -106,7 +106,7 @@
                 <input type="text" class="form-control" placeholder="SSID" id="wifiSSID" />
             </div>
             <div class="col-xs-12" style="margin-top:5px;">
-                <button class="btn btn-primary pull-right" onclick="filterByWifiSSID()"><i class="fa fa-search"></i> Search</button>
+                <button class="btn btn-primary pull-right" onclick="filterByWifiSSID()"><i class="material-icons">search</i> Search</button>
             </div>
         </div>
 
@@ -118,7 +118,7 @@
                 <input type="text" class="form-control" placeholder="Type [ESS] to show only hotspots" id="wifiSecurity" />
             </div>
             <div class="col-xs-12" style="margin-top:5px;">
-                <button class="btn btn-primary pull-right" onclick="filterByWifiSecurity()"><i class="fa fa-search"></i> Search</button>
+                <button class="btn btn-primary pull-right" onclick="filterByWifiSecurity()"><i class="material-icons">search</i> Search</button>
             </div>
         </div>
 
@@ -130,7 +130,7 @@
                 <input type="text" class="form-control" placeholder="Frequency" id="wifiFrequency" />
             </div>
             <div class="col-xs-12" style="margin-top:5px;">
-                <button class="btn btn-primary pull-right" onclick="filterByWifiFrequency()"><i class="fa fa-search"></i> Search</button>
+                <button class="btn btn-primary pull-right" onclick="filterByWifiFrequency()"><i class="material-icons">search</i> Search</button>
             </div>
         </div>
 
@@ -142,7 +142,7 @@
                 <input type="text" class="form-control" placeholder="Level" id="wifiLevel" />
             </div>
             <div class="col-xs-12" style="margin-top:5px;">
-                <button class="btn btn-primary pull-right" onclick="filterByWifiLevel()"><i class="fa fa-search"></i> Search</button>
+                <button class="btn btn-primary pull-right" onclick="filterByWifiLevel()"><i class="material-icons">search</i> Search</button>
             </div>
         </div>
 
@@ -155,7 +155,7 @@
                 <input style="margin-top:5px;" class="form-control" type="text" id="lang" placeholder="Lang" />
             </div>
             <div class="col-xs-12" style="margin-top:5px;">
-                <button class="btn btn-primary pull-right" onclick="goToLatLang()"><i class="fa fa-compass"></i> Go</button>
+                <button class="btn btn-primary pull-right" onclick="goToLatLang()"><i class="material-icons">gps_fixed</i> Go</button>
             </div>
         </div>
     </div>
@@ -216,7 +216,7 @@
                     content = content
                     +"<div class='row marker-info'><div class='col-xs-12 column'><strong><i class='material-icons'>devices</i> Device Id: </strong>" + data[i].General.DeviceId + "<div/>"
                     +"<div class='row marker-info m-t-xs'><div class='col-xs-12 column'><strong><i class='material-icons'>explore</i> Latitude: </strong>" + data[i].General.GPSlatitude +
-                    "<br /><strong style='margin-left: 23.5px;'>Longtitude: </strong>"+data[i].General.Longtitude +"<div/>"
+                    "<br /><strong style='margin-left: 23.5px;'>Longtitude: </strong>"+data[i].General.GPSLongtitude +"<div/>"
                     +"<div class='row marker-info'><div class='col-xs-12 column'><strong><i class='material-icons'>date_range</i> Date and time: </strong>" + getNiceLookingDate(new Date(data[i].General.DateAndTime)) + "<div/>"
 
                     +"<div class='row marker-info m-t-sm'><div class='col-xs-12 column'><strong><i class='material-icons'>storage</i> BSSID: </strong>" + data[i].BSSID + "<div/>"
